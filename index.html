@@ -435,6 +435,175 @@
             margin-top: 4px;
         }
 
+        /* Deploy Options */
+        .deploy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        @media (max-width: 700px) {
+            .deploy-grid { grid-template-columns: 1fr; }
+        }
+
+        .deploy-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 36px 32px;
+            position: relative;
+        }
+
+        .deploy-card h3 {
+            font-size: 1.25rem;
+            color: #f3f4f6;
+            margin-bottom: 12px;
+        }
+
+        .deploy-card p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .deploy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .deploy-list li {
+            color: #d1d5db;
+            font-size: 0.88rem;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .deploy-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .deploy-card:nth-child(1) .deploy-list li::before { background: #4ade80; }
+        .deploy-card:nth-child(2) .deploy-list li::before { background: #818cf8; }
+
+        .deploy-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .deploy-tag-free {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+        }
+
+        .deploy-tag-hosted {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.25);
+        }
+
+        .byoai-note {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .byoai-note strong {
+            color: #fcd34d;
+            font-size: 0.95rem;
+        }
+
+        .byoai-note p {
+            color: #9ca3af;
+            font-size: 0.88rem;
+            margin-top: 6px;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+
+        .price-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .price-card:nth-child(2) {
+            border-color: #4f46e5;
+        }
+
+        .price-card h3 {
+            font-size: 1.15rem;
+            color: #f3f4f6;
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #f3f4f6;
+            margin-bottom: 4px;
+        }
+
+        .price-amount span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #6b7280;
+        }
+
+        .price-desc {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .price-features {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .price-features li {
+            color: #d1d5db;
+            font-size: 0.85rem;
+            padding: 6px 0;
+            padding-left: 22px;
+            position: relative;
+        }
+
+        .price-features li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: 700;
+        }
+
         /* What's Next */
         .roadmap-grid {
             display: grid;
@@ -764,6 +933,85 @@
         </div>
     </section>
 
+    <!-- Deploy Options -->
+    <section class="divider">
+        <h2>Two Ways <span>to Run It</span></h2>
+        <p class="subtitle">Self-host for full control, or use a hosted account and skip the setup.</p>
+
+        <div class="deploy-grid">
+            <div class="deploy-card">
+                <div class="deploy-tag deploy-tag-free">Free &mdash; Self-Hosted</div>
+                <h3>Run It Yourself</h3>
+                <p>Install Jeniphyr on your own server or Mac. Full control, full access, nothing leaves your machine.</p>
+                <ul class="deploy-list">
+                    <li>All Hands available out of the box</li>
+                    <li>Direct access to local files, network, devices</li>
+                    <li>Your data stays on your hardware</li>
+                    <li>You manage updates and uptime</li>
+                </ul>
+            </div>
+            <div class="deploy-card">
+                <div class="deploy-tag deploy-tag-hosted">Hosted Account</div>
+                <h3>We Run It For You</h3>
+                <p>Sign up, plug in your AI key, and start chatting. No server to maintain. Cloud Hands work immediately &mdash; install a small local agent if you want access to your home network and files.</p>
+                <ul class="deploy-list">
+                    <li>Cloud Hands work instantly (Memory, HTTP, Telegram, Reminder, Delegate)</li>
+                    <li>Optional local agent for home access (files, shell, git, TV, devices)</li>
+                    <li>We handle hosting, updates, and uptime</li>
+                    <li>Your AI key, your costs &mdash; predictable and transparent</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="byoai-note">
+            <strong>BYOAI &mdash; Bring Your Own AI Key</strong>
+            <p>Both options use your own Anthropic or OpenAI API key. Jeniphyr is the platform &mdash; the AI costs are between you and your provider. No markup, no surprises.</p>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="divider">
+        <h2>Simple <span>Pricing</span></h2>
+        <p class="subtitle">For the hosted version. Self-hosting is always free.</p>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price-amount">$0</div>
+                <div class="price-desc">Get started</div>
+                <ul class="price-features">
+                    <li>1 assistant</li>
+                    <li>3 cloud Hands</li>
+                    <li>100 messages/day</li>
+                    <li>Shared memory</li>
+                </ul>
+            </div>
+            <div class="price-card">
+                <h3>Pro</h3>
+                <div class="price-amount">$9 <span>/mo</span></div>
+                <div class="price-desc">The full experience</div>
+                <ul class="price-features">
+                    <li>4 assistants</li>
+                    <li>All cloud Hands</li>
+                    <li>Unlimited messages</li>
+                    <li>Local agent included</li>
+                    <li>Reminders &amp; scheduling</li>
+                </ul>
+            </div>
+            <div class="price-card">
+                <h3>Team</h3>
+                <div class="price-amount">$19 <span>/mo</span></div>
+                <div class="price-desc">Multiple people</div>
+                <ul class="price-features">
+                    <li>Everything in Pro</li>
+                    <li>Multiple users</li>
+                    <li>Shared memories across team</li>
+                    <li>Priority queue</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats -->
     <div class="divider">
         <div class="stats">
@@ -773,15 +1021,15 @@
             </div>
             <div class="stat">
                 <div class="stat-num">10</div>
-                <div class="stat-label">Hands (Capabilities)</div>
+                <div class="stat-label">Hands</div>
             </div>
             <div class="stat">
                 <div class="stat-num">153</div>
                 <div class="stat-label">Tests Passing</div>
             </div>
             <div class="stat">
-                <div class="stat-num">0</div>
-                <div class="stat-label">Cloud Dependencies</div>
+                <div class="stat-num">BYOAI</div>
+                <div class="stat-label">Your Key, Your Costs</div>
             </div>
         </div>
     </div>
@@ -794,21 +1042,21 @@
         <div class="roadmap-grid">
             <div class="roadmap-col">
                 <h3>Soon</h3>
-                <div class="roadmap-item">Web dashboard<small>Manage assistants at jeniphyr.test</small></div>
+                <div class="roadmap-item">Web dashboard<small>Manage assistants and conversations</small></div>
                 <div class="roadmap-item">Cron monitoring<small>Automated health checks every 5 min</small></div>
-                <div class="roadmap-item">Token budget alerts<small>Know before you overspend</small></div>
+                <div class="roadmap-item">Cloud hosted version<small>Sign up and start chatting</small></div>
             </div>
             <div class="roadmap-col">
                 <h3>Medium Term</h3>
+                <div class="roadmap-item">Local agent<small>Bridge cloud to your home network</small></div>
                 <div class="roadmap-item">Email Hand<small>Send and read email via SMTP/IMAP</small></div>
-                <div class="roadmap-item">Browser Hand<small>Screenshot pages, click buttons</small></div>
                 <div class="roadmap-item">Image generation<small>Using Laravel AI SDK built-in support</small></div>
             </div>
             <div class="roadmap-col">
                 <h3>Big Vision</h3>
-                <div class="roadmap-item">Voice control<small>NativePHP Mobile + audio transcription</small></div>
+                <div class="roadmap-item">Voice control<small>Mobile app + audio transcription</small></div>
                 <div class="roadmap-item">Agent-to-Agent protocol<small>Assistants across different machines</small></div>
-                <div class="roadmap-item">Multi-user support<small>Multiple people, each with own keys</small></div>
+                <div class="roadmap-item">More Hands<small>Browser, screenshots, clipboard, and more</small></div>
             </div>
         </div>
     </section>
