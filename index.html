@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeniphyr TVHand — AI-Powered TV Control</title>
+    <title>Jeniphyr — Your Server Has a Brain Now</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,7 +16,7 @@
 
         /* Hero */
         .hero {
-            min-height: 80vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -65,26 +65,26 @@
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
             line-height: 1.15;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero .tagline {
+            font-size: 1.3rem;
             color: #9ca3af;
-            max-width: 640px;
-            margin-bottom: 40px;
+            max-width: 680px;
+            margin-bottom: 48px;
         }
 
         .hero-demo {
             background: #111827;
             border: 1px solid #1f2937;
             border-radius: 16px;
-            padding: 32px 40px;
-            max-width: 520px;
+            padding: 28px 36px;
+            max-width: 540px;
             width: 100%;
             text-align: left;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
@@ -102,19 +102,21 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .demo-msg .avatar {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 700;
             flex-shrink: 0;
             margin-top: 2px;
+            color: #fff;
         }
 
         .demo-msg.user .avatar { background: #1e40af; }
@@ -122,11 +124,11 @@
 
         .demo-msg .text {
             background: #1f2937;
-            padding: 10px 16px;
+            padding: 9px 14px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             color: #d1d5db;
-            max-width: 380px;
+            max-width: 400px;
         }
 
         .demo-msg.ai .text {
@@ -135,7 +137,13 @@
             color: #c4b5fd;
         }
 
-        /* Section layout */
+        .demo-divider {
+            height: 1px;
+            background: #1f2937;
+            margin: 14px 0;
+        }
+
+        /* Shared section styles */
         section {
             max-width: 1000px;
             margin: 0 auto;
@@ -163,82 +171,173 @@
             max-width: 640px;
         }
 
-        /* What Is section */
-        .what-is {
-            border-top: 1px solid #1f2937;
-        }
+        .divider { border-top: 1px solid #1f2937; }
 
-        .explanation {
+        /* Big Idea section */
+        .big-idea-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 32px;
         }
 
         @media (max-width: 700px) {
-            .explanation { grid-template-columns: 1fr; }
+            .big-idea-grid { grid-template-columns: 1fr; }
         }
 
-        .explain-card {
+        .idea-card {
             background: #111827;
             border: 1px solid #1f2937;
             border-radius: 16px;
             padding: 32px;
         }
 
-        .explain-card h3 {
+        .idea-card h3 {
             font-size: 1.15rem;
             color: #f3f4f6;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 10px;
         }
 
-        .explain-card h3 .icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .explain-card p {
+        .idea-card p {
             color: #9ca3af;
             font-size: 0.95rem;
         }
 
-        /* How It Works */
-        .how-it-works {
-            border-top: 1px solid #1f2937;
+        .idea-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
         }
 
-        .steps {
+        /* Assistants section */
+        .assistants-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .assistants-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .assistants-grid { grid-template-columns: 1fr; }
+        }
+
+        .asst-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .asst-card:hover { border-color: #4f46e5; }
+
+        .asst-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .asst-card h3 {
+            font-size: 1.05rem;
+            color: #f3f4f6;
+            margin-bottom: 4px;
+        }
+
+        .asst-card .asst-slug {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .asst-card p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Hands section */
+        .hands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .hand-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 22px 20px;
+            transition: border-color 0.2s;
+        }
+
+        .hand-card:hover { border-color: #4f46e5; }
+
+        .hand-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .hand-name {
+            font-weight: 600;
+            color: #f3f4f6;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .hand-desc {
+            color: #9ca3af;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .hand-example {
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: #818cf8;
+            font-style: italic;
+        }
+
+        /* How It Works (flow) */
+        .flow {
             display: flex;
             flex-direction: column;
             gap: 0;
-            position: relative;
         }
 
-        .step {
+        .flow-step {
             display: flex;
             gap: 24px;
-            padding: 28px 0;
+            padding: 24px 0;
             position: relative;
         }
 
-        .step:not(:last-child)::after {
+        .flow-step:not(:last-child)::after {
             content: '';
             position: absolute;
             left: 23px;
-            top: 70px;
+            top: 66px;
             bottom: 0;
             width: 2px;
             background: linear-gradient(to bottom, #4f46e5, transparent);
         }
 
-        .step-num {
+        .flow-num {
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -252,138 +351,23 @@
             color: #fff;
         }
 
-        .step-content h3 {
-            font-size: 1.1rem;
+        .flow-content h3 {
+            font-size: 1.05rem;
             color: #f3f4f6;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
-        .step-content p {
+        .flow-content p {
             color: #9ca3af;
             font-size: 0.95rem;
         }
 
-        /* Commands grid */
-        .commands {
-            border-top: 1px solid #1f2937;
-        }
-
-        .cmd-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .cmd-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
-            padding: 24px;
-            transition: border-color 0.2s;
-        }
-
-        .cmd-card:hover {
-            border-color: #4f46e5;
-        }
-
-        .cmd-name {
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 14px;
-            color: #818cf8;
-            background: rgba(99, 102, 241, 0.1);
-            padding: 4px 10px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .cmd-card p {
-            color: #9ca3af;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .cmd-example {
-            font-size: 0.85rem;
-            color: #6b7280;
-            font-style: italic;
-        }
-
-        .cmd-example strong {
-            color: #d1d5db;
-            font-style: normal;
-        }
-
-        /* Brands */
-        .brands {
-            border-top: 1px solid #1f2937;
-        }
-
-        .brand-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 700px) {
-            .brand-grid { grid-template-columns: 1fr; }
-        }
-
-        .brand-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 32px;
-            text-align: center;
-        }
-
-        .brand-card .brand-logo {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-        }
-
-        .brand-card h3 {
-            font-size: 1.3rem;
-            color: #f3f4f6;
-            margin-bottom: 8px;
-        }
-
-        .brand-card p {
-            color: #9ca3af;
-            font-size: 0.9rem;
-        }
-
-        .brand-card .tag {
-            display: inline-block;
-            margin-top: 14px;
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .tag-live {
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.25);
-        }
-
-        .tag-ready {
-            background: rgba(59, 130, 246, 0.15);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.25);
-        }
-
-        /* Architecture */
-        .architecture {
-            border-top: 1px solid #1f2937;
-        }
-
+        /* Architecture diagram */
         .arch-diagram {
             background: #111827;
             border: 1px solid #1f2937;
             border-radius: 16px;
-            padding: 40px;
+            padding: 40px 20px;
             text-align: center;
         }
 
@@ -391,51 +375,105 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
         }
 
         .arch-box {
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.85rem;
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        .arch-user {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #93c5fd;
-        }
-
-        .arch-jeniphyr {
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            color: #c4b5fd;
-        }
-
-        .arch-hand {
-            background: rgba(99, 102, 241, 0.15);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #a5b4fc;
-        }
-
-        .arch-driver {
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #86efac;
-        }
-
-        .arch-tv {
-            background: rgba(251, 191, 36, 0.15);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            color: #fcd34d;
-        }
+        .a-user { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #93c5fd; }
+        .a-brain { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); color: #c4b5fd; }
+        .a-hand { background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: #a5b4fc; }
+        .a-world { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #86efac; }
+        .a-device { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.3); color: #fcd34d; }
 
         .arch-arrow {
             color: #4b5563;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .arch-label {
+            font-size: 0.7rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Stats bar */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            padding: 48px 24px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        /* What's Next */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .roadmap-grid { grid-template-columns: 1fr; }
+        }
+
+        .roadmap-col h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid;
+        }
+
+        .roadmap-col:nth-child(1) h3 { color: #4ade80; border-color: #4ade80; }
+        .roadmap-col:nth-child(2) h3 { color: #60a5fa; border-color: #60a5fa; }
+        .roadmap-col:nth-child(3) h3 { color: #c084fc; border-color: #c084fc; }
+
+        .roadmap-item {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #d1d5db;
+        }
+
+        .roadmap-item small {
+            display: block;
+            color: #6b7280;
+            font-size: 0.78rem;
+            margin-top: 4px;
         }
 
         /* Footer */
@@ -447,8 +485,23 @@
             font-size: 0.85rem;
         }
 
-        footer strong {
-            color: #9ca3af;
+        footer strong { color: #9ca3af; }
+
+        .tech-pills {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tech-pill {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
     </style>
 </head>
@@ -456,12 +509,12 @@
 
     <!-- Hero -->
     <div class="hero">
-        <div class="badge">Jeniphyr AI Platform</div>
-        <h1>Control Your TV<br>With a Text Message</h1>
-        <p>TVHand lets Jeniphyr — an AI assistant living on your server — control any TV on your home network. Just tell it what you want in plain English.</p>
+        <div class="badge">AI Assistant Platform</div>
+        <h1>Jeniphyr</h1>
+        <p class="tagline">A personal AI that lives on your server. It reads files, runs commands, controls your TV, remembers what you tell it, and delegates tasks to specialist assistants &mdash; all from a Telegram chat.</p>
 
         <div class="hero-demo">
-            <div class="demo-label">Telegram Chat</div>
+            <div class="demo-label">Telegram &mdash; @Jeniphyr_bot</div>
             <div class="demo-msg user">
                 <div class="avatar">J</div>
                 <div class="text">Turn off the living room TV</div>
@@ -470,182 +523,306 @@
                 <div class="avatar">A</div>
                 <div class="text">Done. Living Room TV is now off.</div>
             </div>
-            <div style="height: 8px"></div>
+            <div class="demo-divider"></div>
             <div class="demo-msg user">
                 <div class="avatar">J</div>
-                <div class="text">Put on Netflix and turn the volume up 5</div>
+                <div class="text">Remind me to check the deploy in 30 minutes</div>
             </div>
             <div class="demo-msg ai">
                 <div class="avatar">A</div>
-                <div class="text">Launched Netflix on Living Room TV. Volume up 5 steps.</div>
+                <div class="text">Reminder set for 30 minutes from now.</div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-msg user">
+                <div class="avatar">J</div>
+                <div class="text">/dev what's the git status of proofpop?</div>
+            </div>
+            <div class="demo-msg ai">
+                <div class="avatar">D</div>
+                <div class="text">Branch main, clean working tree, 47 commits. Last: "Add billing webhook handler"</div>
             </div>
         </div>
     </div>
 
-    <!-- What Is This? -->
-    <section class="what-is">
-        <h2>What <span>Is This?</span></h2>
-        <p class="subtitle">A quick explanation for the non-technical.</p>
+    <!-- The Big Idea -->
+    <section class="divider">
+        <h2>The <span>Big Idea</span></h2>
+        <p class="subtitle">What if your server had a brain? Not just a CPU &mdash; a thinking, remembering, acting brain you could talk to from your phone.</p>
 
-        <div class="explanation">
-            <div class="explain-card">
-                <h3><span class="icon" style="background:rgba(168,85,247,0.15); color:#c4b5fd;">&#x1f916;</span> Jeniphyr</h3>
-                <p>Jeniphyr is a personal AI assistant that lives on a home server. You talk to it through Telegram (a messaging app), and it can do things in the real world &mdash; run commands, check websites, and now control devices.</p>
+        <div class="big-idea-grid">
+            <div class="idea-card">
+                <div class="idea-icon" style="background:rgba(168,85,247,0.15); color:#c4b5fd;">&#x1f9e0;</div>
+                <h3>A Brain, Not a Chatbot</h3>
+                <p>Jeniphyr isn't a chat window. It's an AI that lives on your machine 24/7, with tools to interact with the real world &mdash; your files, your network, your devices. You give it hands, and it uses them.</p>
             </div>
-            <div class="explain-card">
-                <h3><span class="icon" style="background:rgba(99,102,241,0.15); color:#a5b4fc;">&#x1f4fa;</span> TVHand</h3>
-                <p>TVHand is a new capability (called a "Hand") that gives Jeniphyr the ability to control TVs. It speaks the language of each TV brand automatically, so you just say what you want in plain English.</p>
+            <div class="idea-card">
+                <div class="idea-icon" style="background:rgba(99,102,241,0.15); color:#a5b4fc;">&#x1f4ac;</div>
+                <h3>Talk From Anywhere</h3>
+                <p>You talk to Jeniphyr through Telegram &mdash; the same messaging app on your phone. Send a message, get a response. No dashboards to open, no terminals to find. Just text it.</p>
             </div>
-            <div class="explain-card">
-                <h3><span class="icon" style="background:rgba(34,197,94,0.15); color:#86efac;">&#x1f50c;</span> Driver Pattern</h3>
-                <p>Different TV brands have different remote control protocols. TVHand uses a "driver" system &mdash; a Vizio driver that speaks Vizio's language, a Roku driver that speaks Roku's. Adding a new brand means adding one file.</p>
+            <div class="idea-card">
+                <div class="idea-icon" style="background:rgba(34,197,94,0.15); color:#86efac;">&#x270b;</div>
+                <h3>Hands = Abilities</h3>
+                <p>Each capability is a "Hand." File reading is a Hand. Git is a Hand. TV control is a Hand. Each assistant gets only the Hands it needs &mdash; no assistant has access to everything.</p>
             </div>
-            <div class="explain-card">
-                <h3><span class="icon" style="background:rgba(251,191,36,0.15); color:#fcd34d;">&#x1f3e0;</span> Local Network</h3>
-                <p>Everything runs on your home WiFi. The AI sends commands directly to your TV over the local network &mdash; no cloud service, no subscription, no third-party access. Your home, your control.</p>
+            <div class="idea-card">
+                <div class="idea-icon" style="background:rgba(251,191,36,0.15); color:#fcd34d;">&#x1f91d;</div>
+                <h3>Specialists, Not Generalists</h3>
+                <p>Four assistants, each with a different job. Jeniphyr handles general chat and routes. Dev handles code and devices. Research looks things up. Monitor watches the server. They delegate to each other.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Four Assistants -->
+    <section class="divider">
+        <h2>The <span>Team</span></h2>
+        <p class="subtitle">Four AI assistants, each with their own personality, model, and tools.</p>
+
+        <div class="assistants-grid">
+            <div class="asst-card">
+                <div class="asst-avatar" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">J</div>
+                <h3>Jeniphyr</h3>
+                <div class="asst-slug">/default</div>
+                <p>Main assistant. Handles conversation, files, reminders, and routes complex tasks to the right specialist.</p>
+            </div>
+            <div class="asst-card">
+                <div class="asst-avatar" style="background: linear-gradient(135deg, #2563eb, #60a5fa);">D</div>
+                <h3>Dev</h3>
+                <div class="asst-slug">/dev</div>
+                <p>Code and systems. Reads files, runs shell commands, checks git, makes API calls, controls devices.</p>
+            </div>
+            <div class="asst-card">
+                <div class="asst-avatar" style="background: linear-gradient(135deg, #059669, #34d399);">R</div>
+                <h3>Research</h3>
+                <div class="asst-slug">/research</div>
+                <p>Fast lookups. Makes HTTP requests, checks if websites are up, fetches and summarizes web content.</p>
+            </div>
+            <div class="asst-card">
+                <div class="asst-avatar" style="background: linear-gradient(135deg, #d97706, #fbbf24);">M</div>
+                <h3>Monitor</h3>
+                <div class="asst-slug">/monitor</div>
+                <p>Silent watchdog. Checks disk space, memory, services. Only speaks up when something is wrong.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Hands (Capabilities) -->
+    <section class="divider">
+        <h2>The <span>Hands</span></h2>
+        <p class="subtitle">10 capabilities. Each one gives the AI a new way to interact with the world.</p>
+
+        <div class="hands-grid">
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f4c1;</div>
+                <div class="hand-name">File</div>
+                <div class="hand-desc">Read, write, list, and search files. Sandboxed to approved directories.</div>
+                <div class="hand-example">"Read the config file for proofpop"</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f500;</div>
+                <div class="hand-name">Git</div>
+                <div class="hand-desc">Check status, view diffs, read commit logs for any repo on the server.</div>
+                <div class="hand-example">"What changed in the last 3 commits?"</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f4bb;</div>
+                <div class="hand-name">Shell</div>
+                <div class="hand-desc">Run allowlisted terminal commands. Only safe commands are permitted.</div>
+                <div class="hand-example">"How much disk space is left?"</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f310;</div>
+                <div class="hand-name">HTTP</div>
+                <div class="hand-desc">Make GET and POST requests to any URL or API endpoint.</div>
+                <div class="hand-example">"Is proofpop.test responding?"</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x2709;&#xfe0f;</div>
+                <div class="hand-name">Telegram</div>
+                <div class="hand-desc">Send messages back to you. Handles long messages by splitting them intelligently.</div>
+                <div class="hand-example">Every response uses this</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f9e0;</div>
+                <div class="hand-name">Memory</div>
+                <div class="hand-desc">Store and recall facts. Shared memories work across all assistants.</div>
+                <div class="hand-example">"Remember: the Vizio is on 192.168.1.150"</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x23f0;</div>
+                <div class="hand-name">Reminder</div>
+                <div class="hand-desc">Set timed reminders. Supports natural time like "in 30 minutes" or "tomorrow 9am."</div>
+                <div class="hand-example">"Remind me at 5pm to call Shane"</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f91d;</div>
+                <div class="hand-name">Delegate</div>
+                <div class="hand-desc">Route tasks to another assistant. Jeniphyr uses this to send work to specialists.</div>
+                <div class="hand-example">"Check the server" &rarr; routes to Monitor</div>
+            </div>
+            <div class="hand-card">
+                <div class="hand-icon">&#x1f4fa;</div>
+                <div class="hand-name">TV</div>
+                <div class="hand-desc">Control TVs on the network. Power, volume, input, launch apps. Supports Vizio and Roku.</div>
+                <div class="hand-example">"Turn off the TV and launch Netflix"</div>
+            </div>
+            <div class="hand-card" style="border-style: dashed; opacity: 0.6;">
+                <div class="hand-icon">&#x2795;</div>
+                <div class="hand-name">More Coming</div>
+                <div class="hand-desc">Email, screenshots, browser automation, image generation, voice&hellip;</div>
+                <div class="hand-example">Adding a Hand = adding one PHP file</div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works">
-        <h2>How <span>It Works</span></h2>
-        <p class="subtitle">From your thumbs to your TV in under a second.</p>
+    <section class="divider">
+        <h2>How It <span>Works</span></h2>
+        <p class="subtitle">From your phone to the real world, step by step.</p>
 
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-content">
-                    <h3>You send a message</h3>
-                    <p>Open Telegram on your phone and type something natural like "turn on the TV" or "launch YouTube and bump the volume up 5."</p>
+        <div class="flow">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <div class="flow-content">
+                    <h3>You send a Telegram message</h3>
+                    <p>Type something natural. "Turn off the TV." "What's the git status of proofpop?" "Remind me in 20 minutes." No special syntax needed. Prefix with /dev, /research, or /monitor to talk to a specific assistant.</p>
                 </div>
             </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-content">
-                    <h3>Jeniphyr understands your intent</h3>
-                    <p>The AI figures out what you want &mdash; which device, which action, how much. No special syntax or commands to memorize.</p>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <div class="flow-content">
+                    <h3>The message reaches your server</h3>
+                    <p>Telegram sends a webhook to your server. The controller verifies it's really you, finds the right assistant based on any /command prefix, and drops the message into a job queue.</p>
                 </div>
             </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-content">
-                    <h3>TVHand picks the right driver</h3>
-                    <p>Based on which TV you're targeting, TVHand selects the correct driver (Vizio SmartCast, Roku ECP, etc.) and translates your request into the TV's native protocol.</p>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <div class="flow-content">
+                    <h3>The AI thinks and acts</h3>
+                    <p>The queue worker picks up the job and runs the AI agent. Claude reads your message, checks its memories, decides which tools to use, and executes them &mdash; reading files, running commands, calling APIs, whatever it takes.</p>
                 </div>
             </div>
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-content">
-                    <h3>Your TV responds</h3>
-                    <p>The command is sent directly over your home WiFi. The TV turns on, changes input, adjusts volume, or launches an app &mdash; and Jeniphyr confirms it in the chat.</p>
+            <div class="flow-step">
+                <div class="flow-num">4</div>
+                <div class="flow-content">
+                    <h3>You get a response</h3>
+                    <p>The AI sends its answer back through Telegram. The whole loop takes a few seconds. Your conversation history is saved, so context carries over between messages.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What You Can Say -->
-    <section class="commands">
-        <h2>What You <span>Can Say</span></h2>
-        <p class="subtitle">Six tools the AI can use, triggered by natural conversation.</p>
-
-        <div class="cmd-grid">
-            <div class="cmd-card">
-                <div class="cmd-name">Power</div>
-                <p>Turn the TV on, off, or toggle its power state.</p>
-                <div class="cmd-example"><strong>"Turn off the TV"</strong></div>
-            </div>
-            <div class="cmd-card">
-                <div class="cmd-name">Volume</div>
-                <p>Raise or lower the volume by any number of steps, or mute.</p>
-                <div class="cmd-example"><strong>"Volume up 5 notches"</strong></div>
-            </div>
-            <div class="cmd-card">
-                <div class="cmd-name">Input</div>
-                <p>Switch between HDMI ports, antenna, or casting.</p>
-                <div class="cmd-example"><strong>"Switch to HDMI-2"</strong></div>
-            </div>
-            <div class="cmd-card">
-                <div class="cmd-name">Info</div>
-                <p>Check what's happening &mdash; power state, current input, volume.</p>
-                <div class="cmd-example"><strong>"What's on the TV right now?"</strong></div>
-            </div>
-            <div class="cmd-card">
-                <div class="cmd-name">Launch App</div>
-                <p>Open any streaming app: Netflix, YouTube, Hulu, Disney+, and more.</p>
-                <div class="cmd-example"><strong>"Put on Netflix"</strong></div>
-            </div>
-            <div class="cmd-card">
-                <div class="cmd-name">List Devices</div>
-                <p>See all TVs configured on the network and their brands.</p>
-                <div class="cmd-example"><strong>"What TVs do you know about?"</strong></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Supported Brands -->
-    <section class="brands">
-        <h2>Supported <span>Brands</span></h2>
-        <p class="subtitle">Built to grow. Adding a new brand is one file.</p>
-
-        <div class="brand-grid">
-            <div class="brand-card">
-                <div class="brand-logo">V</div>
-                <h3>Vizio SmartCast</h3>
-                <p>HTTPS API on port 7345. Supports power, volume, mute, input switching, and app launching via key commands.</p>
-                <div class="tag tag-live">Live &amp; Tested</div>
-            </div>
-            <div class="brand-card">
-                <div class="brand-logo">R</div>
-                <h3>Roku ECP</h3>
-                <p>HTTP API on port 8060, no authentication needed. Full control including app launch and device info via XML.</p>
-                <div class="tag tag-ready">Driver Ready</div>
             </div>
         </div>
     </section>
 
     <!-- Architecture -->
-    <section class="architecture">
+    <section class="divider">
         <h2>Under <span>the Hood</span></h2>
-        <p class="subtitle">A clean, extensible architecture.</p>
+        <p class="subtitle">A clean, layered architecture. Each piece has one job.</p>
 
         <div class="arch-diagram">
+            <div class="arch-label">You</div>
             <div class="arch-row">
-                <div class="arch-box arch-user">You (Telegram)</div>
+                <div class="arch-box a-user">Telegram (Phone)</div>
             </div>
             <div class="arch-row"><span class="arch-arrow">&darr;</span></div>
+            <div class="arch-label">Server</div>
             <div class="arch-row">
-                <div class="arch-box arch-jeniphyr">Jeniphyr AI (Claude)</div>
+                <div class="arch-box a-brain">Webhook Controller</div>
+                <span class="arch-arrow">&rarr;</span>
+                <div class="arch-box a-brain">Job Queue</div>
+                <span class="arch-arrow">&rarr;</span>
+                <div class="arch-box a-brain">Assistant Runner</div>
             </div>
             <div class="arch-row"><span class="arch-arrow">&darr;</span></div>
+            <div class="arch-label">AI Layer</div>
             <div class="arch-row">
-                <div class="arch-box arch-hand">TVHand (6 tools)</div>
+                <div class="arch-box a-brain">Claude AI (Anthropic)</div>
+            </div>
+            <div class="arch-row"><span class="arch-arrow">&darr; decides which tools to call</span></div>
+            <div class="arch-label">Hands</div>
+            <div class="arch-row">
+                <div class="arch-box a-hand">File</div>
+                <div class="arch-box a-hand">Git</div>
+                <div class="arch-box a-hand">Shell</div>
+                <div class="arch-box a-hand">HTTP</div>
+                <div class="arch-box a-hand">TV</div>
             </div>
             <div class="arch-row">
-                <span class="arch-arrow">&swarr;</span>
-                <span style="width: 60px"></span>
-                <span class="arch-arrow">&searr;</span>
+                <div class="arch-box a-hand">Memory</div>
+                <div class="arch-box a-hand">Reminder</div>
+                <div class="arch-box a-hand">Telegram</div>
+                <div class="arch-box a-hand">Delegate</div>
             </div>
+            <div class="arch-row"><span class="arch-arrow">&darr;</span></div>
+            <div class="arch-label">The Real World</div>
             <div class="arch-row">
-                <div class="arch-box arch-driver">Vizio Driver</div>
-                <div class="arch-box arch-driver">Roku Driver</div>
+                <div class="arch-box a-world">Files</div>
+                <div class="arch-box a-world">Git Repos</div>
+                <div class="arch-box a-world">Terminal</div>
+                <div class="arch-box a-world">APIs</div>
+                <div class="arch-box a-device">TVs</div>
+                <div class="arch-box a-device">Network</div>
             </div>
-            <div class="arch-row">
-                <span class="arch-arrow">&darr;</span>
-                <span style="width: 80px"></span>
-                <span class="arch-arrow">&darr;</span>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="divider">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">4</div>
+                <div class="stat-label">AI Assistants</div>
             </div>
-            <div class="arch-row">
-                <div class="arch-box arch-tv">Living Room TV</div>
-                <div class="arch-box arch-tv">Any Roku Device</div>
+            <div class="stat">
+                <div class="stat-num">10</div>
+                <div class="stat-label">Hands (Capabilities)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">153</div>
+                <div class="stat-label">Tests Passing</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">0</div>
+                <div class="stat-label">Cloud Dependencies</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next -->
+    <section class="divider">
+        <h2>What's <span>Next</span></h2>
+        <p class="subtitle">The roadmap from here.</p>
+
+        <div class="roadmap-grid">
+            <div class="roadmap-col">
+                <h3>Soon</h3>
+                <div class="roadmap-item">Web dashboard<small>Manage assistants at jeniphyr.test</small></div>
+                <div class="roadmap-item">Cron monitoring<small>Automated health checks every 5 min</small></div>
+                <div class="roadmap-item">Token budget alerts<small>Know before you overspend</small></div>
+            </div>
+            <div class="roadmap-col">
+                <h3>Medium Term</h3>
+                <div class="roadmap-item">Email Hand<small>Send and read email via SMTP/IMAP</small></div>
+                <div class="roadmap-item">Browser Hand<small>Screenshot pages, click buttons</small></div>
+                <div class="roadmap-item">Image generation<small>Using Laravel AI SDK built-in support</small></div>
+            </div>
+            <div class="roadmap-col">
+                <h3>Big Vision</h3>
+                <div class="roadmap-item">Voice control<small>NativePHP Mobile + audio transcription</small></div>
+                <div class="roadmap-item">Agent-to-Agent protocol<small>Assistants across different machines</small></div>
+                <div class="roadmap-item">Multi-user support<small>Multiple people, each with own keys</small></div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>Built by <strong>Jeff Rosenthal</strong> &mdash; part of the <strong>Jeniphyr</strong> AI assistant platform.</p>
-        <p style="margin-top: 8px;">Laravel 12 &middot; Claude AI &middot; 153 tests passing</p>
+        <p>Built by <strong>Jeff Rosenthal</strong></p>
+        <div class="tech-pills">
+            <span class="tech-pill">Laravel 12</span>
+            <span class="tech-pill">Claude AI</span>
+            <span class="tech-pill">Telegram</span>
+            <span class="tech-pill">SQLite</span>
+            <span class="tech-pill">PHP 8.4</span>
+        </div>
     </footer>
 
 </body>
