@@ -1,1500 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeniphyr — Your AI Assistant That Actually Does Things</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a1a;
-            color: #e0e0e0;
-            line-height: 1.7;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 24px;
-            background: radial-gradient(ellipse at 50% 30%, #1a1a3e 0%, #0a0a1a 70%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
-            animation: drift 20s ease-in-out infinite;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-30px, 20px); }
-        }
-
-        .hero > * { position: relative; z-index: 1; }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            background: rgba(99, 102, 241, 0.15);
-            color: #818cf8;
-            border: 1px solid rgba(99, 102, 241, 0.25);
-            margin-bottom: 28px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .tagline {
-            font-size: 1.3rem;
-            color: #9ca3af;
-            max-width: 680px;
-            margin-bottom: 48px;
-        }
-
-        .hero-demo {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 28px 36px;
-            max-width: 540px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-        }
-
-        .demo-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #6b7280;
-            margin-bottom: 16px;
-        }
-
-        .demo-msg {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .demo-msg .avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 2px;
-            color: #fff;
-        }
-
-        .demo-msg.user .avatar { background: #1e40af; }
-        .demo-msg.ai .avatar { background: #7c3aed; }
-
-        .demo-msg .text {
-            background: #1f2937;
-            padding: 9px 14px;
-            border-radius: 12px;
-            font-size: 14px;
-            color: #d1d5db;
-            max-width: 400px;
-        }
-
-        .demo-msg.ai .text {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-            color: #c4b5fd;
-        }
-
-        .demo-divider {
-            height: 1px;
-            background: #1f2937;
-            margin: 14px 0;
-        }
-
-        /* Shared section styles */
-        section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 80px 24px;
-        }
-
-        section h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #f3f4f6;
-        }
-
-        section h2 span {
-            background: linear-gradient(135deg, #818cf8, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        section .subtitle {
-            font-size: 1.1rem;
-            color: #9ca3af;
-            margin-bottom: 48px;
-            max-width: 640px;
-        }
-
-        .divider { border-top: 1px solid #1f2937; }
-
-        /* Big Idea section */
-        .big-idea-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-
-        @media (max-width: 700px) {
-            .big-idea-grid { grid-template-columns: 1fr; }
-        }
-
-        .idea-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 32px;
-        }
-
-        .idea-card h3 {
-            font-size: 1.15rem;
-            color: #f3f4f6;
-            margin-bottom: 10px;
-        }
-
-        .idea-card p {
-            color: #9ca3af;
-            font-size: 0.95rem;
-        }
-
-        .idea-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 16px;
-        }
-
-        /* Assistants section */
-        .assistants-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 800px) {
-            .assistants-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 500px) {
-            .assistants-grid { grid-template-columns: 1fr; }
-        }
-
-        .asst-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 28px 24px;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-
-        .asst-card:hover { border-color: #4f46e5; }
-
-        .asst-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 14px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .asst-card h3 {
-            font-size: 1.05rem;
-            color: #f3f4f6;
-            margin-bottom: 4px;
-        }
-
-        .asst-card .asst-slug {
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 12px;
-            color: #6b7280;
-            margin-bottom: 10px;
-        }
-
-        .asst-card p {
-            color: #9ca3af;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        /* Hands section */
-        .hands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .hand-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
-            padding: 22px 20px;
-            transition: border-color 0.2s;
-        }
-
-        .hand-card:hover { border-color: #4f46e5; }
-
-        .hand-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .hand-name {
-            font-weight: 600;
-            color: #f3f4f6;
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-        }
-
-        .hand-desc {
-            color: #9ca3af;
-            font-size: 0.82rem;
-            line-height: 1.5;
-        }
-
-        .hand-example {
-            margin-top: 10px;
-            font-size: 0.78rem;
-            color: #818cf8;
-            font-style: italic;
-        }
-
-        /* Everyday Use Cases */
-        .use-case-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 800px) {
-            .use-case-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 500px) {
-            .use-case-grid { grid-template-columns: 1fr; }
-        }
-
-        .uc-category {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
-            padding: 24px 22px;
-        }
-
-        .uc-category h3 {
-            font-size: 0.95rem;
-            color: #c4b5fd;
-            margin-bottom: 14px;
-            font-weight: 600;
-        }
-
-        .uc-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .uc-list li {
-            color: #d1d5db;
-            font-size: 0.85rem;
-            padding: 5px 0;
-            padding-left: 16px;
-            position: relative;
-            font-style: italic;
-        }
-
-        .uc-list li::before {
-            content: '\203A';
-            position: absolute;
-            left: 0;
-            color: #818cf8;
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .uc-remember-note {
-            background: rgba(168, 85, 247, 0.08);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-top: 32px;
-            text-align: center;
-        }
-
-        .uc-remember-note strong {
-            color: #c4b5fd;
-            font-size: 0.95rem;
-        }
-
-        .uc-remember-note p {
-            color: #9ca3af;
-            font-size: 0.88rem;
-            margin-top: 6px;
-        }
-
-        /* Hand Store */
-        .store-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        @media (max-width: 700px) {
-            .store-grid { grid-template-columns: 1fr; }
-        }
-
-        .store-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 32px 28px;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-
-        .store-card:hover { border-color: #4f46e5; }
-
-        .store-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 16px;
-        }
-
-        .store-card h3 {
-            font-size: 1.05rem;
-            color: #f3f4f6;
-            margin-bottom: 10px;
-        }
-
-        .store-card p {
-            color: #9ca3af;
-            font-size: 0.88rem;
-            line-height: 1.6;
-        }
-
-        /* How It Works (flow) */
-        .flow {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .flow-step {
-            display: flex;
-            gap: 24px;
-            padding: 24px 0;
-            position: relative;
-        }
-
-        .flow-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 23px;
-            top: 66px;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #4f46e5, transparent);
-        }
-
-        .flow-num {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-            color: #fff;
-        }
-
-        .flow-content h3 {
-            font-size: 1.05rem;
-            color: #f3f4f6;
-            margin-bottom: 4px;
-        }
-
-        .flow-content p {
-            color: #9ca3af;
-            font-size: 0.95rem;
-        }
-
-        /* Architecture diagram */
-        .arch-diagram {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .arch-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .arch-box {
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .a-user { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #93c5fd; }
-        .a-brain { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); color: #c4b5fd; }
-        .a-hand { background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: #a5b4fc; }
-        .a-world { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #86efac; }
-        .a-device { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.3); color: #fcd34d; }
-
-        .arch-arrow {
-            color: #4b5563;
-            font-size: 1.1rem;
-        }
-
-        .arch-label {
-            font-size: 0.7rem;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        /* Stats bar */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            padding: 48px 24px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-num {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #818cf8, #c4b5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin-top: 4px;
-        }
-
-        /* Deploy Options */
-        .deploy-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-        }
-
-        @media (max-width: 700px) {
-            .deploy-grid { grid-template-columns: 1fr; }
-        }
-
-        .deploy-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 36px 32px;
-            position: relative;
-        }
-
-        .deploy-card h3 {
-            font-size: 1.25rem;
-            color: #f3f4f6;
-            margin-bottom: 12px;
-        }
-
-        .deploy-card p {
-            color: #9ca3af;
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-        }
-
-        .deploy-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .deploy-list li {
-            color: #d1d5db;
-            font-size: 0.88rem;
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .deploy-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .deploy-card:nth-child(1) .deploy-list li::before { background: #4ade80; }
-        .deploy-card:nth-child(2) .deploy-list li::before { background: #818cf8; }
-
-        .deploy-tag {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .deploy-tag-free {
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.25);
-        }
-
-        .deploy-tag-hosted {
-            background: rgba(99, 102, 241, 0.15);
-            color: #818cf8;
-            border: 1px solid rgba(99, 102, 241, 0.25);
-        }
-
-        .byoai-note {
-            background: rgba(251, 191, 36, 0.08);
-            border: 1px solid rgba(251, 191, 36, 0.2);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-top: 32px;
-            text-align: center;
-        }
-
-        .byoai-note strong {
-            color: #fcd34d;
-            font-size: 0.95rem;
-        }
-
-        .byoai-note p {
-            color: #9ca3af;
-            font-size: 0.88rem;
-            margin-top: 6px;
-        }
-
-        /* Pricing */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 700px) {
-            .pricing-grid { grid-template-columns: 1fr; }
-        }
-
-        .price-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 32px 28px;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-
-        .price-card:nth-child(2) {
-            border-color: #4f46e5;
-        }
-
-        .price-card h3 {
-            font-size: 1.15rem;
-            color: #f3f4f6;
-            margin-bottom: 8px;
-        }
-
-        .price-amount {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #f3f4f6;
-            margin-bottom: 4px;
-        }
-
-        .price-amount span {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #6b7280;
-        }
-
-        .price-desc {
-            color: #9ca3af;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .price-features {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
-
-        .price-features li {
-            color: #d1d5db;
-            font-size: 0.85rem;
-            padding: 6px 0;
-            padding-left: 22px;
-            position: relative;
-        }
-
-        .price-features li::before {
-            content: '\2713';
-            position: absolute;
-            left: 0;
-            color: #4ade80;
-            font-weight: 700;
-        }
-
-        /* Enterprise */
-        .enterprise-hero {
-            background: linear-gradient(135deg, #111827 0%, #1a1a3e 100%);
-            border: 1px solid #2d2b6b;
-            border-radius: 20px;
-            padding: 48px 40px;
-            margin-bottom: 40px;
-        }
-
-        .enterprise-hero h3 {
-            font-size: 1.5rem;
-            color: #f3f4f6;
-            margin-bottom: 12px;
-        }
-
-        .enterprise-hero p {
-            color: #9ca3af;
-            font-size: 1.05rem;
-            max-width: 700px;
-            margin-bottom: 32px;
-        }
-
-        .use-cases {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 700px) {
-            .use-cases { grid-template-columns: 1fr; }
-            .enterprise-hero { padding: 32px 24px; }
-        }
-
-        .use-case {
-            background: rgba(99, 102, 241, 0.06);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .use-case h4 {
-            color: #c4b5fd;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-        }
-
-        .use-case p {
-            color: #9ca3af;
-            font-size: 0.85rem;
-            margin-bottom: 0;
-        }
-
-        .use-case .uc-example {
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #818cf8;
-            font-style: italic;
-        }
-
-        .ent-how-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 700px) {
-            .ent-how-grid { grid-template-columns: 1fr; }
-        }
-
-        .ent-how-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
-            padding: 28px 24px;
-            text-align: center;
-        }
-
-        .ent-how-card .ent-num {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #fff;
-            margin: 0 auto 14px;
-        }
-
-        .ent-how-card h4 {
-            color: #f3f4f6;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
-
-        .ent-how-card p {
-            color: #9ca3af;
-            font-size: 0.85rem;
-        }
-
-        .ent-diff {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 32px;
-            margin-top: 40px;
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        @media (max-width: 700px) {
-            .ent-diff { flex-direction: column; gap: 20px; }
-        }
-
-        .ent-diff-old, .ent-diff-new {
-            flex: 1;
-        }
-
-        .ent-diff h4 {
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-        }
-
-        .ent-diff-old h4 { color: #6b7280; }
-        .ent-diff-new h4 { color: #4ade80; }
-
-        .ent-diff p {
-            font-size: 0.88rem;
-            color: #9ca3af;
-        }
-
-        .ent-diff-vs {
-            color: #4b5563;
-            font-size: 1.5rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        /* What's Next */
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 700px) {
-            .roadmap-grid { grid-template-columns: 1fr; }
-        }
-
-        .roadmap-col h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid;
-        }
-
-        .roadmap-col:nth-child(1) h3 { color: #4ade80; border-color: #4ade80; }
-        .roadmap-col:nth-child(2) h3 { color: #60a5fa; border-color: #60a5fa; }
-        .roadmap-col:nth-child(3) h3 { color: #c084fc; border-color: #c084fc; }
-
-        .roadmap-item {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            color: #d1d5db;
-        }
-
-        .roadmap-item small {
-            display: block;
-            color: #6b7280;
-            font-size: 0.78rem;
-            margin-top: 4px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 24px;
-            border-top: 1px solid #1f2937;
-            color: #6b7280;
-            font-size: 0.85rem;
-        }
-
-        footer strong { color: #9ca3af; }
-
-        .tech-pills {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
-        .tech-pill {
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            background: rgba(99, 102, 241, 0.1);
-            color: #818cf8;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    brand: {
+                        50: '#eef2ff',
+                        100: '#e0e7ff',
+                        200: '#c7d2fe',
+                        300: '#a5b4fc',
+                        400: '#818cf8',
+                        500: '#6366f1',
+                        600: '#4f46e5',
+                        700: '#4338ca',
+                        800: '#3730a3',
+                        900: '#312e81',
+                        950: '#1e1b4b',
+                    },
+                    dark: {
+                        900: '#0a0a1a',
+                        800: '#111827',
+                        700: '#1a1a3e',
+                        600: '#1f2937',
+                    }
+                },
+                fontFamily: {
+                    sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                }
+            }
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
 </head>
-<body>
+<body class="antialiased bg-dark-900 text-gray-300">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur border-b border-white/5" x-data="{ open: false }">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white">Jeniphyr</a>
+                <div class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/5">
+                    <a class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10" href="index.html">Home</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="features.html">Features</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="use-cases.html">Use Cases</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="pricing.html">Pricing</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="enterprise.html">Enterprise</a>
+                </div>
+                <button class="md:hidden text-white" @click="open = !open">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="open" x-transition @click.outside="open = false">
+            <div class="px-4 pb-4 space-y-2">
+                <a class="block px-4 py-2 rounded-lg text-white bg-white/10" href="index.html">Home</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="features.html">Features</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="use-cases.html">Use Cases</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="pricing.html">Pricing</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="enterprise.html">Enterprise</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero -->
-    <div class="hero">
-        <div class="badge">AI Assistant Platform</div>
-        <h1>Jeniphyr</h1>
-        <p class="tagline">A personal AI assistant that actually does things &mdash; books reservations, handles email, controls your home, remembers your preferences, and gets smarter over time. Text it from Telegram. It takes action.</p>
-
-        <div class="hero-demo">
-            <div class="demo-label">Telegram &mdash; @Jeniphyr_bot</div>
-            <div class="demo-msg user">
-                <div class="avatar">J</div>
-                <div class="text">Remember I like aisle seats on Delta</div>
-            </div>
-            <div class="demo-msg ai">
-                <div class="avatar">A</div>
-                <div class="text">Got it. I'll remember that for future flights.</div>
-            </div>
-            <div class="demo-divider"></div>
-            <div class="demo-msg user">
-                <div class="avatar">J</div>
-                <div class="text">What time does Target close today?</div>
-            </div>
-            <div class="demo-msg ai">
-                <div class="avatar">A</div>
-                <div class="text">Your nearest Target closes at 10pm tonight.</div>
-            </div>
-            <div class="demo-divider"></div>
-            <div class="demo-msg user">
-                <div class="avatar">J</div>
-                <div class="text">Turn off the TV and remind me at 5pm to call Shane</div>
-            </div>
-            <div class="demo-msg ai">
-                <div class="avatar">A</div>
-                <div class="text">TV is off. Reminder set for 5:00 PM.</div>
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-950/50 via-dark-900 to-dark-900"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-24">
+            <div class="flex flex-wrap items-center -mx-4">
+                <div class="w-full lg:w-1/2 px-4 mb-12 lg:mb-0">
+                    <div class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-500/15 text-brand-400 border border-brand-500/25 mb-6">AI Assistant Platform</div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                        Your AI assistant that actually
+                        <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">does things.</span>
+                    </h1>
+                    <p class="text-lg text-gray-400 max-w-lg mb-8">Text it from Telegram. It remembers your preferences, searches the web, controls your home, handles email, and gets smarter over time. Not a chatbot. An assistant.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="features.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-600 text-white font-semibold hover:bg-brand-500 transition">
+                            See Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="use-cases.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-white font-semibold hover:bg-white/10 border border-white/10 transition">
+                            What Can It Do?
+                        </a>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 px-4">
+                    <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 shadow-2xl shadow-brand-900/20 max-w-md mx-auto lg:ml-auto">
+                        <div class="text-xs uppercase tracking-widest text-gray-500 mb-4">Telegram &mdash; @Jeniphyr_bot</div>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center text-xs font-bold text-white shrink-0">J</div>
+                                <div class="bg-dark-600 rounded-xl px-3.5 py-2 text-sm text-gray-300">Remember I like aisle seats on Delta</div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-xs font-bold text-white shrink-0">A</div>
+                                <div class="bg-brand-600/10 border border-brand-500/15 rounded-xl px-3.5 py-2 text-sm text-brand-200">Got it. I'll remember that for future flights.</div>
+                            </div>
+                            <div class="h-px bg-dark-600 my-2"></div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center text-xs font-bold text-white shrink-0">J</div>
+                                <div class="bg-dark-600 rounded-xl px-3.5 py-2 text-sm text-gray-300">What time does Target close today?</div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-xs font-bold text-white shrink-0">A</div>
+                                <div class="bg-brand-600/10 border border-brand-500/15 rounded-xl px-3.5 py-2 text-sm text-brand-200">Your nearest Target closes at 10pm tonight.</div>
+                            </div>
+                            <div class="h-px bg-dark-600 my-2"></div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center text-xs font-bold text-white shrink-0">J</div>
+                                <div class="bg-dark-600 rounded-xl px-3.5 py-2 text-sm text-gray-300">Turn off the TV and remind me at 5pm to call Shane</div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-xs font-bold text-white shrink-0">A</div>
+                                <div class="bg-brand-600/10 border border-brand-500/15 rounded-xl px-3.5 py-2 text-sm text-brand-200">TV is off. Reminder set for 5:00 PM.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- The Big Idea -->
-    <section class="divider">
-        <h2>The <span>Big Idea</span></h2>
-        <p class="subtitle">What if you had an AI assistant that could actually do things &mdash; not just talk, but think, remember, and act on your behalf?</p>
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">The <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Big Idea</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">What if your AI assistant could actually do things &mdash; not just talk, but think, remember, and act on your behalf?</p>
 
-        <div class="big-idea-grid">
-            <div class="idea-card">
-                <div class="idea-icon" style="background:rgba(168,85,247,0.15); color:#c4b5fd;">&#x1f9e0;</div>
-                <h3>An Assistant, Not a Chatbot</h3>
-                <p>Siri talks. Alexa listens. Jeniphyr <em>acts</em>. It books things, handles email, controls your home, searches the web, manages your files, and remembers everything you tell it. It has hands &mdash; and it uses them.</p>
-            </div>
-            <div class="idea-card">
-                <div class="idea-icon" style="background:rgba(99,102,241,0.15); color:#a5b4fc;">&#x1f4ac;</div>
-                <h3>Talk From Anywhere</h3>
-                <p>Text Jeniphyr from your phone through Telegram. No apps to download, no dashboards to open. Just send a message and get a response. Works from your couch, a coffee shop, or another country.</p>
-            </div>
-            <div class="idea-card">
-                <div class="idea-icon" style="background:rgba(34,197,94,0.15); color:#86efac;">&#x270b;</div>
-                <h3>It Learns You</h3>
-                <p>Jeniphyr remembers your preferences, your contacts, your routines. "Book my usual" actually works because it knows what your usual is. The more you use it, the smarter it gets &mdash; for you specifically.</p>
-            </div>
-            <div class="idea-card">
-                <div class="idea-icon" style="background:rgba(251,191,36,0.15); color:#fcd34d;">&#x1f91d;</div>
-                <h3>Specialists That Delegate</h3>
-                <p>Behind the scenes, multiple assistants collaborate. Jeniphyr routes your request to the right specialist &mdash; research, dev, monitoring. They share memories and delegate to each other automatically.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Four Assistants -->
-    <section class="divider">
-        <h2>The <span>Team</span></h2>
-        <p class="subtitle">Four AI assistants, each with their own personality, model, and tools.</p>
-
-        <div class="assistants-grid">
-            <div class="asst-card">
-                <div class="asst-avatar" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">J</div>
-                <h3>Jeniphyr</h3>
-                <div class="asst-slug">/default</div>
-                <p>Main assistant. Handles conversation, files, reminders, and routes complex tasks to the right specialist.</p>
-            </div>
-            <div class="asst-card">
-                <div class="asst-avatar" style="background: linear-gradient(135deg, #2563eb, #60a5fa);">D</div>
-                <h3>Dev</h3>
-                <div class="asst-slug">/dev</div>
-                <p>Code and systems. Reads files, runs shell commands, checks git, makes API calls, controls devices.</p>
-            </div>
-            <div class="asst-card">
-                <div class="asst-avatar" style="background: linear-gradient(135deg, #059669, #34d399);">R</div>
-                <h3>Research</h3>
-                <div class="asst-slug">/research</div>
-                <p>Searches the web, makes HTTP requests, checks if websites are up, fetches and summarizes content.</p>
-            </div>
-            <div class="asst-card">
-                <div class="asst-avatar" style="background: linear-gradient(135deg, #d97706, #fbbf24);">M</div>
-                <h3>Monitor</h3>
-                <div class="asst-slug">/monitor</div>
-                <p>Silent watchdog. Checks disk space, memory, services. Only speaks up when something is wrong.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Hands (Capabilities) -->
-    <section class="divider">
-        <h2>The <span>Hands</span></h2>
-        <p class="subtitle">11 capabilities. Each one gives the AI assistant a new way to interact with the world.</p>
-
-        <div class="hands-grid">
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f4c1;</div>
-                <div class="hand-name">File</div>
-                <div class="hand-desc">Read, write, list, and search files. Sandboxed to approved directories.</div>
-                <div class="hand-example">"Read the config file for proofpop"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f500;</div>
-                <div class="hand-name">Git</div>
-                <div class="hand-desc">Check status, view diffs, read commit logs for any repo on the server.</div>
-                <div class="hand-example">"What changed in the last 3 commits?"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f4bb;</div>
-                <div class="hand-name">Shell</div>
-                <div class="hand-desc">Run allowlisted terminal commands. Only safe commands are permitted.</div>
-                <div class="hand-example">"How much disk space is left?"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f310;</div>
-                <div class="hand-name">HTTP</div>
-                <div class="hand-desc">Make GET and POST requests to any URL or API endpoint.</div>
-                <div class="hand-example">"Is proofpop.test responding?"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x2709;&#xfe0f;</div>
-                <div class="hand-name">Telegram</div>
-                <div class="hand-desc">Send messages back to you. Handles long messages by splitting them intelligently.</div>
-                <div class="hand-example">Every response uses this</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f9e0;</div>
-                <div class="hand-name">Memory</div>
-                <div class="hand-desc">Store and recall facts. Shared memories work across all assistants.</div>
-                <div class="hand-example">"Remember: the Vizio is on 192.168.1.150"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x23f0;</div>
-                <div class="hand-name">Reminder</div>
-                <div class="hand-desc">Set timed reminders. Supports natural time like "in 30 minutes" or "tomorrow 9am."</div>
-                <div class="hand-example">"Remind me at 5pm to call Shane"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f91d;</div>
-                <div class="hand-name">Delegate</div>
-                <div class="hand-desc">Route tasks to another assistant. Jeniphyr uses this to send work to specialists.</div>
-                <div class="hand-example">"Check the server" &rarr; routes to Monitor</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f50d;</div>
-                <div class="hand-name">Search</div>
-                <div class="hand-desc">Search the web for current info, news, public posts, documentation, and more.</div>
-                <div class="hand-example">"Search for NativePHP latest news"</div>
-            </div>
-            <div class="hand-card">
-                <div class="hand-icon">&#x1f4fa;</div>
-                <div class="hand-name">TV</div>
-                <div class="hand-desc">Control TVs on the network. Power, volume, input. Supports Vizio and Roku.</div>
-                <div class="hand-example">"Turn off the living room TV"</div>
-            </div>
-            <div class="hand-card" style="border-style: dashed; opacity: 0.6;">
-                <div class="hand-icon">&#x2795;</div>
-                <div class="hand-name">More Coming</div>
-                <div class="hand-desc">Email, calendar, shopping, travel, finance, recipes, and more&hellip;</div>
-                <div class="hand-example">Adding a Hand = adding one PHP file</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Everyday Use Cases -->
-    <section class="divider">
-        <h2>What You Can <span>Ask It To Do</span></h2>
-        <p class="subtitle">Jeniphyr isn't just for developers. Here's what everyday use looks like.</p>
-
-        <div class="use-case-grid">
-            <div class="uc-category">
-                <h3>Around the House</h3>
-                <ul class="uc-list">
-                    <li>"Turn off the TV"</li>
-                    <li>"Set the thermostat to 72"</li>
-                    <li>"Remind me in 30 minutes to move the laundry"</li>
-                    <li>"Is the garage door open?"</li>
-                    <li>"Play some jazz"</li>
-                </ul>
-            </div>
-            <div class="uc-category">
-                <h3>Personal Life</h3>
-                <ul class="uc-list">
-                    <li>"What time does Target close?"</li>
-                    <li>"Find Italian restaurants near downtown Austin"</li>
-                    <li>"Remember I'm allergic to shellfish"</li>
-                    <li>"What can I make with chicken and rice?"</li>
-                    <li>"Do I need an umbrella today?"</li>
-                </ul>
-            </div>
-            <div class="uc-category">
-                <h3>Travel &amp; Errands</h3>
-                <ul class="uc-list">
-                    <li>"Find flights to Denver, March 15-18"</li>
-                    <li>"Book my usual &mdash; aisle seat, Delta"</li>
-                    <li>"How do you say 'where is the train station' in Italian?"</li>
-                    <li>"Track my Amazon package"</li>
-                    <li>"Add milk and eggs to my grocery list"</li>
-                </ul>
-            </div>
-            <div class="uc-category">
-                <h3>Email &amp; Communication</h3>
-                <ul class="uc-list">
-                    <li>"Check my email"</li>
-                    <li>"Reply to Sarah &mdash; tell her I'll be 10 minutes late"</li>
-                    <li>"Summarize what I got today"</li>
-                    <li>"Unsubscribe me from that newsletter"</li>
-                    <li>"Draft a thank-you note to the client"</li>
-                </ul>
-            </div>
-            <div class="uc-category">
-                <h3>Calendar &amp; Scheduling</h3>
-                <ul class="uc-list">
-                    <li>"What's on my schedule tomorrow?"</li>
-                    <li>"Am I free Friday afternoon?"</li>
-                    <li>"Move my dentist appointment to next week"</li>
-                    <li>"Book a meeting with Tom for Thursday at 2"</li>
-                    <li>"Every Monday remind me to submit timesheets"</li>
-                </ul>
-            </div>
-            <div class="uc-category">
-                <h3>Business &amp; Professional</h3>
-                <ul class="uc-list">
-                    <li>"How much revenue this month?"</li>
-                    <li>"Send an invoice to Smith Corp for $2,500"</li>
-                    <li>"Who haven't I followed up with this week?"</li>
-                    <li>"Post this to my Facebook page"</li>
-                    <li>"What are people saying about my brand?"</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="uc-remember-note">
-            <strong>It remembers everything.</strong> Your preferences, your contacts, your routines. Every assistant shares memories, so telling one is telling all of them.
-        </div>
-    </section>
-
-    <!-- Hand Store -->
-    <section class="divider">
-        <h2>The <span>Hand Store</span></h2>
-        <p class="subtitle">Add new capabilities without reinstalling. Like apps for your assistant.</p>
-
-        <div class="store-grid">
-            <div class="store-card">
-                <div class="store-icon" style="background:rgba(34,197,94,0.15); color:#86efac;">&#x1f50c;</div>
-                <h3>Toggle On, Toggle Off</h3>
-                <p>Every Hand is already on the server. Browse the catalog, enable what you want, disable what you don't. No downloads, no installs. Just flip a switch and your assistant learns a new skill.</p>
-            </div>
-            <div class="store-card">
-                <div class="store-icon" style="background:rgba(99,102,241,0.15); color:#a5b4fc;">&#x2699;&#xfe0f;</div>
-                <h3>Create Your Own &mdash; No Code</h3>
-                <p>Need a custom integration? Define it in the dashboard: "Call this API, with these parameters, return this." No programming needed. If there's an API for it, Jeniphyr can use it.</p>
-            </div>
-            <div class="store-card">
-                <div class="store-icon" style="background:rgba(251,191,36,0.15); color:#fcd34d;">&#x1f6d2;</div>
-                <h3>Community Marketplace</h3>
-                <p>Browse Hands created by the community. One-click install. Restaurant booking, fitness tracking, invoice management &mdash; if someone's built it, you can use it.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="divider">
-        <h2>How It <span>Works</span></h2>
-        <p class="subtitle">From your phone to the real world, step by step.</p>
-
-        <div class="flow">
-            <div class="flow-step">
-                <div class="flow-num">1</div>
-                <div class="flow-content">
-                    <h3>You send a Telegram message</h3>
-                    <p>Type something natural. "Turn off the TV." "What's the git status of proofpop?" "Remind me in 20 minutes." No special syntax needed. Prefix with /dev, /research, or /monitor to talk to a specific assistant.</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center text-2xl mb-4">&#x1f9e0;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">An Assistant, Not a Chatbot</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Siri talks. Alexa listens. Jeniphyr <em>acts</em>. It books things, handles email, controls your home, searches the web, manages your files, and remembers everything you tell it.</p>
                 </div>
-            </div>
-            <div class="flow-step">
-                <div class="flow-num">2</div>
-                <div class="flow-content">
-                    <h3>The message reaches Jeniphyr</h3>
-                    <p>Telegram sends a webhook to the server. The controller verifies it's really you, finds the right assistant based on any /command prefix, and drops the message into a job queue.</p>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/15 flex items-center justify-center text-2xl mb-4">&#x1f4ac;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Talk From Anywhere</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Text Jeniphyr from your phone through Telegram. No apps to download, no dashboards to open. Just send a message and get a response. Works from your couch, a coffee shop, or another country.</p>
                 </div>
-            </div>
-            <div class="flow-step">
-                <div class="flow-num">3</div>
-                <div class="flow-content">
-                    <h3>The assistant thinks and acts</h3>
-                    <p>The queue worker picks up the job and runs the AI assistant. It reads your message, checks its memories, decides which tools to use, and executes them &mdash; reading files, running commands, calling APIs, whatever it takes.</p>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/15 flex items-center justify-center text-2xl mb-4">&#x270b;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">It Learns You</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Jeniphyr remembers your preferences, your contacts, your routines. "Book my usual" actually works because it knows what your usual is. The more you use it, the smarter it gets.</p>
                 </div>
-            </div>
-            <div class="flow-step">
-                <div class="flow-num">4</div>
-                <div class="flow-content">
-                    <h3>You get a response</h3>
-                    <p>The assistant sends its answer back through Telegram. The whole loop takes a few seconds. Your conversation history is saved, so context carries over between messages.</p>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center text-2xl mb-4">&#x1f91d;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Specialists That Delegate</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Behind the scenes, multiple assistants collaborate. Jeniphyr routes your request to the right specialist &mdash; research, dev, monitoring. They share memories and delegate to each other automatically.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Architecture -->
-    <section class="divider">
-        <h2>Under <span>the Hood</span></h2>
-        <p class="subtitle">A clean, layered architecture. Each piece has one job.</p>
+    <!-- The Team -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">The <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Team</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">Four AI assistants, each with their own personality, model, and tools.</p>
 
-        <div class="arch-diagram">
-            <div class="arch-label">You</div>
-            <div class="arch-row">
-                <div class="arch-box a-user">Telegram (Phone)</div>
-            </div>
-            <div class="arch-row"><span class="arch-arrow">&darr;</span></div>
-            <div class="arch-label">Server</div>
-            <div class="arch-row">
-                <div class="arch-box a-brain">Webhook Controller</div>
-                <span class="arch-arrow">&rarr;</span>
-                <div class="arch-box a-brain">Job Queue</div>
-                <span class="arch-arrow">&rarr;</span>
-                <div class="arch-box a-brain">Assistant Runner</div>
-            </div>
-            <div class="arch-row"><span class="arch-arrow">&darr;</span></div>
-            <div class="arch-label">AI Layer</div>
-            <div class="arch-row">
-                <div class="arch-box a-brain">Claude AI (Anthropic)</div>
-            </div>
-            <div class="arch-row"><span class="arch-arrow">&darr; decides which tools to call</span></div>
-            <div class="arch-label">Hands</div>
-            <div class="arch-row">
-                <div class="arch-box a-hand">File</div>
-                <div class="arch-box a-hand">Git</div>
-                <div class="arch-box a-hand">Shell</div>
-                <div class="arch-box a-hand">HTTP</div>
-                <div class="arch-box a-hand">Search</div>
-            </div>
-            <div class="arch-row">
-                <div class="arch-box a-hand">TV</div>
-                <div class="arch-box a-hand">Memory</div>
-                <div class="arch-box a-hand">Reminder</div>
-                <div class="arch-box a-hand">Telegram</div>
-                <div class="arch-box a-hand">Delegate</div>
-            </div>
-            <div class="arch-row"><span class="arch-arrow">&darr;</span></div>
-            <div class="arch-label">The Real World</div>
-            <div class="arch-row">
-                <div class="arch-box a-world">Files</div>
-                <div class="arch-box a-world">Git Repos</div>
-                <div class="arch-box a-world">Terminal</div>
-                <div class="arch-box a-world">APIs</div>
-                <div class="arch-box a-device">TVs</div>
-                <div class="arch-box a-device">Network</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Deploy Options -->
-    <section class="divider">
-        <h2>Two Ways <span>to Run It</span></h2>
-        <p class="subtitle">Self-host for full control, or use a hosted account and skip the setup.</p>
-
-        <div class="deploy-grid">
-            <div class="deploy-card">
-                <div class="deploy-tag deploy-tag-free">Free &mdash; Self-Hosted</div>
-                <h3>Run It Yourself</h3>
-                <p>Install Jeniphyr on your own server or Mac. Full control, full access, nothing leaves your machine.</p>
-                <ul class="deploy-list">
-                    <li>All Hands available out of the box</li>
-                    <li>Direct access to local files, network, devices</li>
-                    <li>Your data stays on your hardware</li>
-                    <li>You manage updates and uptime</li>
-                </ul>
-            </div>
-            <div class="deploy-card">
-                <div class="deploy-tag deploy-tag-hosted">Hosted Account</div>
-                <h3>We Run It For You</h3>
-                <p>Sign up, plug in your AI key, and start chatting. No server to maintain. Cloud Hands work immediately &mdash; install a small local agent if you want access to your home network and files.</p>
-                <ul class="deploy-list">
-                    <li>Cloud Hands work instantly (Memory, HTTP, Telegram, Reminder, Delegate)</li>
-                    <li>Optional local agent for home access (files, shell, git, TV, devices)</li>
-                    <li>We handle hosting, updates, and uptime</li>
-                    <li>Your AI key, your costs &mdash; predictable and transparent</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="byoai-note">
-            <strong>BYOAI &mdash; Bring Your Own AI Key</strong>
-            <p>Both options use your own Anthropic or OpenAI API key. Jeniphyr is the platform &mdash; the AI costs are between you and your provider. No markup, no surprises.</p>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="divider">
-        <h2>Simple <span>Pricing</span></h2>
-        <p class="subtitle">For the hosted version. Self-hosting is always free.</p>
-
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Free</h3>
-                <div class="price-amount">$0</div>
-                <div class="price-desc">Get started</div>
-                <ul class="price-features">
-                    <li>1 assistant</li>
-                    <li>3 cloud Hands</li>
-                    <li>100 messages/day</li>
-                    <li>Shared memory</li>
-                </ul>
-            </div>
-            <div class="price-card">
-                <h3>Pro</h3>
-                <div class="price-amount">$9 <span>/mo</span></div>
-                <div class="price-desc">The full experience</div>
-                <ul class="price-features">
-                    <li>4 assistants</li>
-                    <li>All cloud Hands</li>
-                    <li>Unlimited messages</li>
-                    <li>Local agent included</li>
-                    <li>Reminders &amp; scheduling</li>
-                </ul>
-            </div>
-            <div class="price-card">
-                <h3>Team</h3>
-                <div class="price-amount">$19 <span>/mo</span></div>
-                <div class="price-desc">Multiple people</div>
-                <ul class="price-features">
-                    <li>Everything in Pro</li>
-                    <li>Multiple users</li>
-                    <li>Shared memories across team</li>
-                    <li>Priority queue</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enterprise -->
-    <section class="divider">
-        <h2>Enterprise: <span>Distributed Agents</span></h2>
-        <p class="subtitle">The same architecture, scaled to an entire organization.</p>
-
-        <div class="enterprise-hero">
-            <h3>Every Machine Gets an Agent. You Talk to All of Them.</h3>
-            <p>Install a lightweight agent on every server, build machine, and workstation in your company. From a central Jeniphyr instance, orchestrate tasks across all of them using plain English. No SSH, no VPN, no YAML pipelines.</p>
-
-            <div class="use-cases">
-                <div class="use-case">
-                    <h4>Build &amp; Deploy</h4>
-                    <p>Pull code on the build server, run tests on staging, deploy to production. One sentence.</p>
-                    <div class="uc-example">"Build and deploy the latest release"</div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 text-center hover:border-brand-600/50 transition">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 to-purple-400 flex items-center justify-center text-xl font-bold text-white mx-auto mb-3">J</div>
+                    <h3 class="font-semibold text-white">Jeniphyr</h3>
+                    <div class="text-xs text-gray-500 font-mono mb-2">/default</div>
+                    <p class="text-gray-400 text-sm">Main assistant. Handles conversation, files, reminders, and routes tasks to specialists.</p>
                 </div>
-                <div class="use-case">
-                    <h4>Distributed Processing</h4>
-                    <p>A 4-hour data job? Split it across 3 idle machines. Done in 90 minutes.</p>
-                    <div class="uc-example">"Run this batch job across whatever's free"</div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 text-center hover:border-brand-600/50 transition">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-xl font-bold text-white mx-auto mb-3">D</div>
+                    <h3 class="font-semibold text-white">Dev</h3>
+                    <div class="text-xs text-gray-500 font-mono mb-2">/dev</div>
+                    <p class="text-gray-400 text-sm">Code and systems. Files, shell commands, git, API calls, devices.</p>
                 </div>
-                <div class="use-case">
-                    <h4>IT Management</h4>
-                    <p>Check disk space, restart services, audit installed software. Across every machine at once.</p>
-                    <div class="uc-example">"How much disk space is left on the file server?"</div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 text-center hover:border-brand-600/50 transition">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-400 flex items-center justify-center text-xl font-bold text-white mx-auto mb-3">R</div>
+                    <h3 class="font-semibold text-white">Research</h3>
+                    <div class="text-xs text-gray-500 font-mono mb-2">/research</div>
+                    <p class="text-gray-400 text-sm">Searches the web, fetches content, checks websites, summarizes findings.</p>
                 </div>
-                <div class="use-case">
-                    <h4>Remote Teams</h4>
-                    <p>Agents connect outbound over the internet. No same-network requirement. Works from anywhere, like Slack.</p>
-                    <div class="uc-example">"Deploy to staging" &mdash; sent from a coffee shop</div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 text-center hover:border-brand-600/50 transition">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-amber-600 to-amber-400 flex items-center justify-center text-xl font-bold text-white mx-auto mb-3">M</div>
+                    <h3 class="font-semibold text-white">Monitor</h3>
+                    <div class="text-xs text-gray-500 font-mono mb-2">/monitor</div>
+                    <p class="text-gray-400 text-sm">Silent watchdog. Checks disk, memory, services. Only speaks when something is wrong.</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="ent-how-grid">
-            <div class="ent-how-card">
-                <div class="ent-num">1</div>
-                <h4>Install the Agent</h4>
-                <p>A small process on each machine. Registers itself, reports its capabilities (OS, hardware, installed tools), and opens a connection to central.</p>
-            </div>
-            <div class="ent-how-card">
-                <div class="ent-num">2</div>
-                <h4>Jeniphyr Knows Your Fleet</h4>
-                <p>The central brain maintains a live registry of every machine &mdash; what it can do, whether it's busy, and what's running on it right now.</p>
-            </div>
-            <div class="ent-how-card">
-                <div class="ent-num">3</div>
-                <h4>Talk, Don't Configure</h4>
-                <p>Say what you want in plain English. The AI figures out which machine to use, runs the task, and reports back. No pipelines to write.</p>
-            </div>
-        </div>
-
-        <div class="ent-diff">
-            <div class="ent-diff-old">
-                <h4>The Old Way</h4>
-                <p>SSH into the build server. Write a Jenkins pipeline. Configure Ansible playbooks. Learn YAML. Maintain it all. Hope it works.</p>
-            </div>
-            <div class="ent-diff-vs">vs</div>
-            <div class="ent-diff-new">
-                <h4>The Jeniphyr Way</h4>
-                <p>Install the agent. Open Telegram. Type what you want. It happens.</p>
             </div>
         </div>
     </section>
 
     <!-- Stats -->
-    <div class="divider">
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-num">4</div>
-                <div class="stat-label">AI Assistants</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num">11</div>
-                <div class="stat-label">Hands</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num">163</div>
-                <div class="stat-label">Tests Passing</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num">BYOAI</div>
-                <div class="stat-label">Your Key, Your Costs</div>
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+            <div class="flex flex-wrap justify-center gap-12 sm:gap-16">
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">4</div>
+                    <div class="text-sm text-gray-500 mt-1">AI Assistants</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">11</div>
+                    <div class="text-sm text-gray-500 mt-1">Hands</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">163</div>
+                    <div class="text-sm text-gray-500 mt-1">Tests Passing</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">BYOAI</div>
+                    <div class="text-sm text-gray-500 mt-1">Your Key, Your Costs</div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- What's Next -->
-    <section class="divider">
-        <h2>What's <span>Next</span></h2>
-        <p class="subtitle">The roadmap from here.</p>
-
-        <div class="roadmap-grid">
-            <div class="roadmap-col">
-                <h3>Soon</h3>
-                <div class="roadmap-item">Web dashboard<small>Manage assistants and conversations</small></div>
-                <div class="roadmap-item">Cron monitoring<small>Automated health checks every 5 min</small></div>
-                <div class="roadmap-item">Cloud hosted version<small>Sign up and start chatting</small></div>
-            </div>
-            <div class="roadmap-col">
-                <h3>Medium Term</h3>
-                <div class="roadmap-item">Email &amp; Calendar Hands<small>Read, reply, schedule &mdash; from Telegram</small></div>
-                <div class="roadmap-item">Hand Store<small>Browse and enable capabilities in one click</small></div>
-                <div class="roadmap-item">Local agent<small>Bridge cloud to your home network</small></div>
-            </div>
-            <div class="roadmap-col">
-                <h3>Big Vision</h3>
-                <div class="roadmap-item">Voice control<small>Talk to Jeniphyr from your phone</small></div>
-                <div class="roadmap-item">Custom Hands &mdash; no code<small>Define integrations in the dashboard</small></div>
-                <div class="roadmap-item">Enterprise distributed agents<small>Orchestrate an entire fleet from Telegram</small></div>
+    <!-- CTA -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <div class="bg-gradient-to-br from-dark-700 to-dark-800 border border-brand-600/20 rounded-3xl p-12 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">See what Jeniphyr can do</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-lg mx-auto">From booking flights to controlling your TV to managing your email &mdash; explore the full range of capabilities.</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="use-cases.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-600 text-white font-semibold hover:bg-brand-500 transition">
+                        Explore Use Cases
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="pricing.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-white font-semibold hover:bg-white/10 border border-white/10 transition">
+                        View Pricing
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>Built by <strong>Jeff Rosenthal</strong></p>
-        <div class="tech-pills">
-            <span class="tech-pill">Laravel 12</span>
-            <span class="tech-pill">Claude AI</span>
-            <span class="tech-pill">Telegram</span>
-            <span class="tech-pill">SQLite</span>
-            <span class="tech-pill">PHP 8.4</span>
+    <footer class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+            <div class="flex flex-wrap justify-between items-start gap-8 mb-10">
+                <div>
+                    <div class="text-xl font-bold text-white mb-2">Jeniphyr</div>
+                    <p class="text-sm text-gray-500">Your AI assistant that actually does things.</p>
+                </div>
+                <div class="flex flex-wrap gap-12">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="features.html">Features</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="use-cases.html">Use Cases</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="enterprise.html">Enterprise</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html#self-hosted">Self-Hosted</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-4 pt-8 border-t border-white/5">
+                <p class="text-sm text-gray-500">Built by Jeff Rosenthal</p>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Laravel 12</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Claude AI</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Telegram</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">PHP 8.4</span>
+                </div>
+            </div>
         </div>
     </footer>
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features — Jeniphyr</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    brand: {
+                        50: '#eef2ff',
+                        100: '#e0e7ff',
+                        200: '#c7d2fe',
+                        300: '#a5b4fc',
+                        400: '#818cf8',
+                        500: '#6366f1',
+                        600: '#4f46e5',
+                        700: '#4338ca',
+                        800: '#3730a3',
+                        900: '#312e81',
+                        950: '#1e1b4b',
+                    },
+                    dark: {
+                        900: '#0a0a1a',
+                        800: '#111827',
+                        700: '#1a1a3e',
+                        600: '#1f2937',
+                    }
+                },
+                fontFamily: {
+                    sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                }
+            }
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+</head>
+<body class="antialiased bg-dark-900 text-gray-300">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur border-b border-white/5" x-data="{ open: false }">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white">Jeniphyr</a>
+                <div class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/5">
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="index.html">Home</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10" href="features.html">Features</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="use-cases.html">Use Cases</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="pricing.html">Pricing</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="enterprise.html">Enterprise</a>
+                </div>
+                <button class="md:hidden text-white" @click="open = !open">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="open" x-transition @click.outside="open = false">
+            <div class="px-4 pb-4 space-y-2">
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="index.html">Home</a>
+                <a class="block px-4 py-2 rounded-lg text-white bg-white/10" href="features.html">Features</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="use-cases.html">Use Cases</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="pricing.html">Pricing</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="enterprise.html">Enterprise</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-950/50 via-dark-900 to-dark-900"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Hands</span> &mdash; What Jeniphyr Can Do
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">Hands are capabilities. Each Hand gives Jeniphyr the ability to interact with a specific part of the real world &mdash; files, devices, APIs, the web, and more.</p>
+        </div>
+    </section>
+
+    <!-- Hands Grid -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">Available <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Hands</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">11 built-in capabilities, with more on the way.</p>
+
+            <div class="grid gap-5" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+
+                <!-- File -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F4C1;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">File</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Read, write, list, and search files on the server. Sandboxed to allowed directories.</p>
+                    <p class="text-brand-300 text-xs italic">"Read the config file for proofpop"</p>
+                </div>
+
+                <!-- Git -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F500;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Git</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Status, diffs, commit logs. See what changed and when across your repositories.</p>
+                    <p class="text-brand-300 text-xs italic">"What changed in the last 3 commits?"</p>
+                </div>
+
+                <!-- Shell -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F4BB;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Shell</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Run allowlisted commands only. Safe, audited, no surprises.</p>
+                    <p class="text-brand-300 text-xs italic">"How much disk space is left?"</p>
+                </div>
+
+                <!-- HTTP -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F310;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">HTTP</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">GET/POST to any URL. Check if sites are up, call APIs, fetch data.</p>
+                    <p class="text-brand-300 text-xs italic">"Is proofpop.test responding?"</p>
+                </div>
+
+                <!-- Telegram -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x2709;&#xFE0F;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Telegram</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Send messages back to you with smart chunking for long responses.</p>
+                    <p class="text-brand-300 text-xs italic">"Every response uses this"</p>
+                </div>
+
+                <!-- Memory -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F9E0;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Memory</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Store and recall facts. Shared across all assistants so they all know what you've told any of them.</p>
+                    <p class="text-brand-300 text-xs italic">"Remember: the Vizio is on 192.168.1.150"</p>
+                </div>
+
+                <!-- Reminder -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x23F0;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Reminder</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Set reminders with natural time support. "In 20 minutes" or "at 5pm" both work.</p>
+                    <p class="text-brand-300 text-xs italic">"Remind me at 5pm to call Shane"</p>
+                </div>
+
+                <!-- Delegate -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F91D;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Delegate</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Route tasks to the right specialist assistant automatically.</p>
+                    <p class="text-brand-300 text-xs italic">"Check the server &rarr; routes to Monitor"</p>
+                </div>
+
+                <!-- Search -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F50D;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Search</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Search the web via Brave. Get real-time answers, not stale training data.</p>
+                    <p class="text-brand-300 text-xs italic">"Search for NativePHP latest news"</p>
+                </div>
+
+                <!-- TV -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                    <div class="text-3xl mb-3">&#x1F4FA;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">TV</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-3">Power, volume, input control. Works with Vizio SmartCast and Roku devices.</p>
+                    <p class="text-brand-300 text-xs italic">"Turn off the living room TV"</p>
+                </div>
+
+                <!-- More Coming -->
+                <div class="border-2 border-dashed border-dark-600 rounded-2xl p-6 opacity-60 flex flex-col items-center justify-center text-center">
+                    <div class="text-3xl mb-3">&#x2795;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">More Coming</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Email, calendar, shopping, travel, smart home, and more&hellip;</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Hand Store -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">The Hand <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Store</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">Add, remove, and create capabilities without writing a line of code.</p>
+
+            <div class="grid sm:grid-cols-3 gap-6">
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/15 flex items-center justify-center text-2xl mb-4">&#x1F50C;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Toggle On/Off</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">All Hands live on your server already. Just enable or disable them from the dashboard. No downloads, no installs.</p>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/15 flex items-center justify-center text-2xl mb-4">&#x2699;&#xFE0F;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Create Your Own &mdash; No Code</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Define new integrations right in the dashboard. Specify an API endpoint, parameters, and description. Jeniphyr figures out the rest.</p>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center text-2xl mb-4">&#x1F6D2;</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Community Marketplace</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Browse Hands built by the community. One-click install. Share your own creations with others.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">How It <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Works</span></h2>
+            <p class="text-gray-400 text-lg mb-16 max-w-xl">Four steps from your message to a real-world result.</p>
+
+            <div class="relative">
+                <!-- Connecting line -->
+                <div class="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-600/0 via-brand-600/40 to-brand-600/0"></div>
+
+                <div class="grid md:grid-cols-4 gap-10 md:gap-6 relative">
+                    <!-- Step 1 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center mx-auto mb-5 relative z-10">
+                            <span class="text-2xl font-bold text-brand-400">1</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">You Send a Message</h3>
+                        <p class="text-gray-400 text-sm">Open Telegram on your phone and text @Jeniphyr_bot whatever you need.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center mx-auto mb-5 relative z-10">
+                            <span class="text-2xl font-bold text-brand-400">2</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Jeniphyr Receives It</h3>
+                        <p class="text-gray-400 text-sm">A webhook catches the message, drops it into a job queue, and processing begins instantly.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center mx-auto mb-5 relative z-10">
+                            <span class="text-2xl font-bold text-brand-400">3</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">The Assistant Thinks &amp; Acts</h3>
+                        <p class="text-gray-400 text-sm">Claude AI reads the message, checks memory, decides which Hands to use, and executes them.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center mx-auto mb-5 relative z-10">
+                            <span class="text-2xl font-bold text-brand-400">4</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">You Get a Response</h3>
+                        <p class="text-gray-400 text-sm">The result comes back to Telegram. Done. You never left the chat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Diagram -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">Under the <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Hood</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">A layered architecture from your phone to the real world.</p>
+
+            <div class="max-w-2xl mx-auto space-y-4">
+
+                <!-- You -->
+                <div class="bg-blue-600/10 border border-blue-500/30 rounded-2xl p-5 text-center">
+                    <div class="text-xs uppercase tracking-widest text-blue-400 mb-1">You</div>
+                    <div class="text-white font-semibold">Telegram (Phone)</div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="flex justify-center">
+                    <svg class="w-6 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 32"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v24m0 0l-6-6m6 6l6-6"/></svg>
+                </div>
+
+                <!-- Server -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-5 text-center">
+                    <div class="text-xs uppercase tracking-widest text-gray-500 mb-2">Server</div>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span class="px-3 py-1.5 rounded-lg text-sm bg-dark-600 text-gray-300 border border-dark-600">Webhook Controller</span>
+                        <span class="text-gray-500 self-center">&rarr;</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm bg-dark-600 text-gray-300 border border-dark-600">Job Queue</span>
+                        <span class="text-gray-500 self-center">&rarr;</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm bg-dark-600 text-gray-300 border border-dark-600">Assistant Runner</span>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="flex justify-center">
+                    <svg class="w-6 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 32"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v24m0 0l-6-6m6 6l6-6"/></svg>
+                </div>
+
+                <!-- AI Layer -->
+                <div class="bg-purple-600/10 border border-purple-500/30 rounded-2xl p-5 text-center">
+                    <div class="text-xs uppercase tracking-widest text-purple-400 mb-1">AI Layer</div>
+                    <div class="text-white font-semibold">Claude AI (Anthropic)</div>
+                </div>
+
+                <!-- Arrow with label -->
+                <div class="flex flex-col items-center">
+                    <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v16m0 0l-6-6m6 6l6-6"/></svg>
+                    <span class="text-xs text-gray-500 italic my-1">decides which tools to call</span>
+                    <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v16m0 0l-6-6m6 6l6-6"/></svg>
+                </div>
+
+                <!-- Hands -->
+                <div class="bg-brand-600/10 border border-brand-500/30 rounded-2xl p-5 text-center">
+                    <div class="text-xs uppercase tracking-widest text-brand-400 mb-3">Hands</div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">File</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Git</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Shell</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">HTTP</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Search</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">TV</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Memory</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Reminder</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Telegram</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-brand-500/10 text-brand-300 border border-brand-500/20">Delegate</span>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="flex justify-center">
+                    <svg class="w-6 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 32"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v24m0 0l-6-6m6 6l6-6"/></svg>
+                </div>
+
+                <!-- The Real World -->
+                <div class="bg-green-600/10 border border-green-500/30 rounded-2xl p-5 text-center">
+                    <div class="text-xs uppercase tracking-widest text-green-400 mb-3">The Real World</div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-green-500/10 text-green-300 border border-green-500/20">Files</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-green-500/10 text-green-300 border border-green-500/20">Git Repos</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-green-500/10 text-green-300 border border-green-500/20">Terminal</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-green-500/10 text-green-300 border border-green-500/20">APIs</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-green-500/10 text-green-300 border border-green-500/20">TVs</span>
+                        <span class="px-2.5 py-1 rounded-lg text-xs bg-green-500/10 text-green-300 border border-green-500/20">Network</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+            <div class="flex flex-wrap justify-between items-start gap-8 mb-10">
+                <div>
+                    <div class="text-xl font-bold text-white mb-2">Jeniphyr</div>
+                    <p class="text-sm text-gray-500">Your AI assistant that actually does things.</p>
+                </div>
+                <div class="flex flex-wrap gap-12">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="features.html">Features</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="use-cases.html">Use Cases</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="enterprise.html">Enterprise</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html#self-hosted">Self-Hosted</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-4 pt-8 border-t border-white/5">
+                <p class="text-sm text-gray-500">Built by Jeff Rosenthal</p>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Laravel 12</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Claude AI</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Telegram</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">PHP 8.4</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

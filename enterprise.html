@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise — Jeniphyr</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    brand: {
+                        50: '#eef2ff',
+                        100: '#e0e7ff',
+                        200: '#c7d2fe',
+                        300: '#a5b4fc',
+                        400: '#818cf8',
+                        500: '#6366f1',
+                        600: '#4f46e5',
+                        700: '#4338ca',
+                        800: '#3730a3',
+                        900: '#312e81',
+                        950: '#1e1b4b',
+                    },
+                    dark: {
+                        900: '#0a0a1a',
+                        800: '#111827',
+                        700: '#1a1a3e',
+                        600: '#1f2937',
+                    }
+                },
+                fontFamily: {
+                    sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                }
+            }
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+</head>
+<body class="antialiased bg-dark-900 text-gray-300">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur border-b border-white/5" x-data="{ open: false }">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white">Jeniphyr</a>
+                <div class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/5">
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="index.html">Home</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="features.html">Features</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="use-cases.html">Use Cases</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="pricing.html">Pricing</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10" href="enterprise.html">Enterprise</a>
+                </div>
+                <button class="md:hidden text-white" @click="open = !open">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="open" x-transition @click.outside="open = false">
+            <div class="px-4 pb-4 space-y-2">
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="index.html">Home</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="features.html">Features</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="use-cases.html">Use Cases</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="pricing.html">Pricing</a>
+                <a class="block px-4 py-2 rounded-lg text-white bg-white/10" href="enterprise.html">Enterprise</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enterprise Hero -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-950/50 via-dark-900 to-dark-900"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-24">
+            <div class="bg-gradient-to-br from-dark-700 to-dark-800 border border-brand-600/20 rounded-3xl p-10 sm:p-14">
+                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-500/15 text-brand-400 border border-brand-500/25 mb-6">Enterprise</div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6 max-w-3xl">
+                    Every Machine Gets an Agent. You Talk to All of Them.
+                </h1>
+                <p class="text-lg text-gray-400 max-w-2xl mb-12">Install a lightweight agent on every server, build machine, and workstation. Orchestrate tasks across all of them using plain English. No SSH, no VPN, no YAML pipelines.</p>
+
+                <!-- Use Case Cards 2x2 -->
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center text-xl mb-4">&#x1f680;</div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Build &amp; Deploy</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-3">Pull code, run tests, deploy &mdash; all from a single message. No pipelines to maintain.</p>
+                        <div class="bg-dark-900/60 border border-dark-600 rounded-lg px-3 py-2">
+                            <span class="text-xs text-gray-500">Example:</span>
+                            <p class="text-sm text-brand-300 italic">"Build and deploy the latest release"</p>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center text-xl mb-4">&#x26a1;</div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Distributed Processing</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-3">A 4-hour job becomes 90 minutes when split across every available machine automatically.</p>
+                        <div class="bg-dark-900/60 border border-dark-600 rounded-lg px-3 py-2">
+                            <span class="text-xs text-gray-500">Example:</span>
+                            <p class="text-sm text-brand-300 italic">"Run this batch job across whatever's free"</p>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center text-xl mb-4">&#x1f5a5;</div>
+                        <h3 class="text-lg font-semibold text-white mb-2">IT Management</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-3">Check disk space, restart services, audit installed software. Ask in English, get answers instantly.</p>
+                        <div class="bg-dark-900/60 border border-dark-600 rounded-lg px-3 py-2">
+                            <span class="text-xs text-gray-500">Example:</span>
+                            <p class="text-sm text-brand-300 italic">"How much disk space is left on the file server?"</p>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 border border-dark-600 rounded-2xl p-6 hover:border-brand-600/50 transition">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center text-xl mb-4">&#x1f30d;</div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Remote Teams</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-3">Agents connect outbound &mdash; no inbound ports, no VPN. Works from anywhere your team happens to be.</p>
+                        <div class="bg-dark-900/60 border border-dark-600 rounded-lg px-3 py-2">
+                            <span class="text-xs text-gray-500">Example:</span>
+                            <p class="text-sm text-brand-300 italic">"Deploy to staging &mdash; sent from a coffee shop"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">How It <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Works</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">Three steps. No YAML. No configuration files. No learning curve.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition relative">
+                    <div class="absolute -top-4 left-8 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-sm font-bold text-white">1</div>
+                    <h3 class="text-lg font-semibold text-white mb-3 mt-2">Install the Agent</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">A small, lightweight process on each machine. It registers itself, reports its capabilities, and connects to the central Jeniphyr instance. One command to install.</p>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition relative">
+                    <div class="absolute -top-4 left-8 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-sm font-bold text-white">2</div>
+                    <h3 class="text-lg font-semibold text-white mb-3 mt-2">Jeniphyr Knows Your Fleet</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">A live registry of every machine &mdash; what it can do, whether it's busy, and what it's currently running. Always up to date, always accurate.</p>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition relative">
+                    <div class="absolute -top-4 left-8 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-sm font-bold text-white">3</div>
+                    <h3 class="text-lg font-semibold text-white mb-3 mt-2">Talk, Don't Configure</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Type what you want in plain English. The AI figures out which machine should handle it, runs the task, and reports back. No scripts to write, no playbooks to maintain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Old Way vs Jeniphyr Way -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">The Comparison</h2>
+
+            <div class="grid md:grid-cols-[1fr_auto_1fr] gap-6 items-stretch">
+                <!-- Old Way -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden">
+                    <div class="bg-gray-700/50 px-6 py-4">
+                        <h3 class="text-lg font-semibold text-gray-300">The Old Way</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 leading-relaxed">SSH into the build server. Write a Jenkins pipeline. Configure Ansible playbooks. Learn YAML. Maintain it all. Hope it works.</p>
+                    </div>
+                </div>
+
+                <!-- VS -->
+                <div class="flex items-center justify-center">
+                    <div class="text-4xl sm:text-5xl font-extrabold bg-gradient-to-b from-gray-500 to-gray-700 bg-clip-text text-transparent">vs</div>
+                </div>
+
+                <!-- Jeniphyr Way -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden">
+                    <div class="bg-emerald-600/20 px-6 py-4">
+                        <h3 class="text-lg font-semibold text-emerald-400">The Jeniphyr Way</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 leading-relaxed">Install the agent. Open Telegram. Type what you want. It happens.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The AI Differentiator -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">The AI <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Differentiator</span></h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-xl">Why this isn't just another infrastructure tool.</p>
+
+            <div class="bg-gradient-to-br from-dark-700 to-dark-800 border border-brand-600/20 rounded-3xl p-10 sm:p-12">
+                <p class="text-lg text-gray-300 leading-relaxed max-w-3xl">The competition requires YAML playbooks, Groovy pipelines, HCL configs. You have to think like the tool. With Jeniphyr, you say what you want in plain English and the AI figures out the rest. That's a fundamentally different experience.</p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <span class="px-4 py-1.5 rounded-full text-xs bg-dark-800/80 text-gray-400 border border-dark-600">Ansible &mdash; YAML</span>
+                    <span class="px-4 py-1.5 rounded-full text-xs bg-dark-800/80 text-gray-400 border border-dark-600">Jenkins &mdash; Groovy</span>
+                    <span class="px-4 py-1.5 rounded-full text-xs bg-dark-800/80 text-gray-400 border border-dark-600">Terraform &mdash; HCL</span>
+                    <span class="px-4 py-1.5 rounded-full text-xs bg-dark-800/80 text-gray-400 border border-dark-600">Rundeck &mdash; Scripts</span>
+                    <span class="px-4 py-1.5 rounded-full text-xs bg-brand-600/20 text-brand-400 border border-brand-500/30 font-semibold">Jeniphyr &mdash; Plain English</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Pricing -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <div class="bg-dark-800 border border-dark-600 rounded-2xl p-10 sm:p-12 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Enterprise Pricing</h2>
+                <p class="text-gray-400 text-lg mb-3 max-w-lg mx-auto">Contact us for enterprise pricing. Per-organization or per-agent models available.</p>
+                <p class="text-gray-500 text-sm mb-8">Tailored to your fleet size, usage patterns, and support needs.</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="mailto:jeff@thecodingpit.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-600 text-white font-semibold hover:bg-brand-500 transition">
+                        Contact Us
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="pricing.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-white font-semibold hover:bg-white/10 border border-white/10 transition">
+                        Consumer Pricing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+            <div class="flex flex-wrap justify-between items-start gap-8 mb-10">
+                <div>
+                    <div class="text-xl font-bold text-white mb-2">Jeniphyr</div>
+                    <p class="text-sm text-gray-500">Your AI assistant that actually does things.</p>
+                </div>
+                <div class="flex flex-wrap gap-12">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="features.html">Features</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="use-cases.html">Use Cases</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="enterprise.html">Enterprise</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html#self-hosted">Self-Hosted</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-4 pt-8 border-t border-white/5">
+                <p class="text-sm text-gray-500">Built by Jeff Rosenthal</p>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Laravel 12</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Claude AI</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Telegram</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">PHP 8.4</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

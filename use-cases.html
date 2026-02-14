@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Cases — Jeniphyr</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    brand: {
+                        50: '#eef2ff',
+                        100: '#e0e7ff',
+                        200: '#c7d2fe',
+                        300: '#a5b4fc',
+                        400: '#818cf8',
+                        500: '#6366f1',
+                        600: '#4f46e5',
+                        700: '#4338ca',
+                        800: '#3730a3',
+                        900: '#312e81',
+                        950: '#1e1b4b',
+                    },
+                    dark: {
+                        900: '#0a0a1a',
+                        800: '#111827',
+                        700: '#1a1a3e',
+                        600: '#1f2937',
+                    }
+                },
+                fontFamily: {
+                    sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                }
+            }
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+</head>
+<body class="antialiased bg-dark-900 text-gray-300">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur border-b border-white/5" x-data="{ open: false }">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white">Jeniphyr</a>
+                <div class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/5">
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="index.html">Home</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="features.html">Features</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10" href="use-cases.html">Use Cases</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="pricing.html">Pricing</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="enterprise.html">Enterprise</a>
+                </div>
+                <button class="md:hidden text-white" @click="open = !open">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="open" x-transition @click.outside="open = false">
+            <div class="px-4 pb-4 space-y-2">
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="index.html">Home</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="features.html">Features</a>
+                <a class="block px-4 py-2 rounded-lg text-white bg-white/10" href="use-cases.html">Use Cases</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="pricing.html">Pricing</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="enterprise.html">Enterprise</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-950/50 via-dark-900 to-dark-900"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                What You Can Ask It To <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Do</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-xl mx-auto">Jeniphyr isn't just for developers. Here's what everyday use looks like.</p>
+        </div>
+    </section>
+
+    <!-- Use Case Grid -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Around the House -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <h3 class="text-lg font-semibold text-brand-300 mb-5">Around the House</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Turn off the TV"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Set the thermostat to 72"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Remind me in 30 minutes to move the laundry"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Is the garage door open?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Play some jazz"</em></li>
+                    </ul>
+                </div>
+
+                <!-- Personal Life -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <h3 class="text-lg font-semibold text-brand-300 mb-5">Personal Life</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"What time does Target close?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Find Italian restaurants near downtown Austin"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Remember I'm allergic to shellfish"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"What can I make with chicken and rice?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Do I need an umbrella today?"</em></li>
+                    </ul>
+                </div>
+
+                <!-- Travel & Errands -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <h3 class="text-lg font-semibold text-brand-300 mb-5">Travel &amp; Errands</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Find flights to Denver, March 15-18"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Book my usual &mdash; aisle seat, Delta"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"How do you say 'where is the train station' in Italian?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Track my Amazon package"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Add milk and eggs to my grocery list"</em></li>
+                    </ul>
+                </div>
+
+                <!-- Email & Communication -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <h3 class="text-lg font-semibold text-brand-300 mb-5">Email &amp; Communication</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Check my email"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Reply to Sarah &mdash; tell her I'll be 10 minutes late"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Summarize what I got today"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Unsubscribe me from that newsletter"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Draft a thank-you note to the client"</em></li>
+                    </ul>
+                </div>
+
+                <!-- Calendar & Scheduling -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <h3 class="text-lg font-semibold text-brand-300 mb-5">Calendar &amp; Scheduling</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"What's on my schedule tomorrow?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Am I free Friday afternoon?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Move my dentist appointment to next week"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Book a meeting with Tom for Thursday at 2"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Every Monday remind me to submit timesheets"</em></li>
+                    </ul>
+                </div>
+
+                <!-- Business & Professional -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-600/50 transition">
+                    <h3 class="text-lg font-semibold text-brand-300 mb-5">Business &amp; Professional</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"How much revenue this month?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Send an invoice to Smith Corp for $2,500"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Who haven't I followed up with this week?"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"Post this to my Facebook page"</em></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-brand-400 shrink-0">&rsaquo;</span><em>"What are people saying about my brand?"</em></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory Callout Box -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+            <div class="bg-gradient-to-br from-brand-950 to-purple-950/50 border border-brand-600/20 rounded-3xl p-12 text-center max-w-3xl mx-auto">
+                <p class="text-lg sm:text-xl text-gray-300 leading-relaxed">It remembers everything. Your preferences, your contacts, your routines. Every assistant shares memories, so telling one is telling all of them.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Hands Preview -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3 text-center">Hands <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Coming Soon</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto text-center">New capabilities are always being added. Here's what's on the roadmap.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Personal Hands -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8">
+                    <h3 class="text-lg font-semibold text-white mb-5">Personal</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Email</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Calendar</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Contacts</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Shopping</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Finance</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Travel</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Weather</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">SmartHome</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Music</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">News</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Recipe</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Health</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Translation</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Image</span>
+                    </div>
+                </div>
+
+                <!-- Business Hands -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8">
+                    <h3 class="text-lg font-semibold text-white mb-5">Business</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">CRM</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Invoice</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Social</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Appointment</span>
+                        <span class="px-3 py-1.5 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Document</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+            <div class="flex flex-wrap justify-between items-start gap-8 mb-10">
+                <div>
+                    <div class="text-xl font-bold text-white mb-2">Jeniphyr</div>
+                    <p class="text-sm text-gray-500">Your AI assistant that actually does things.</p>
+                </div>
+                <div class="flex flex-wrap gap-12">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="features.html">Features</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="use-cases.html">Use Cases</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="enterprise.html">Enterprise</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html#self-hosted">Self-Hosted</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-4 pt-8 border-t border-white/5">
+                <p class="text-sm text-gray-500">Built by Jeff Rosenthal</p>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Laravel 12</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Claude AI</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Telegram</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">PHP 8.4</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

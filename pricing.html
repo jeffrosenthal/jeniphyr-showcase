@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — Jeniphyr</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    brand: {
+                        50: '#eef2ff',
+                        100: '#e0e7ff',
+                        200: '#c7d2fe',
+                        300: '#a5b4fc',
+                        400: '#818cf8',
+                        500: '#6366f1',
+                        600: '#4f46e5',
+                        700: '#4338ca',
+                        800: '#3730a3',
+                        900: '#312e81',
+                        950: '#1e1b4b',
+                    },
+                    dark: {
+                        900: '#0a0a1a',
+                        800: '#111827',
+                        700: '#1a1a3e',
+                        600: '#1f2937',
+                    }
+                },
+                fontFamily: {
+                    sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                }
+            }
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+</head>
+<body class="antialiased bg-dark-900 text-gray-300">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur border-b border-white/5" x-data="{ open: false }">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white">Jeniphyr</a>
+                <div class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/5">
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="index.html">Home</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="features.html">Features</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="use-cases.html">Use Cases</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10" href="pricing.html">Pricing</a>
+                    <a class="px-4 py-1.5 rounded-full text-sm text-gray-400 hover:text-white hover:bg-white/10 transition" href="enterprise.html">Enterprise</a>
+                </div>
+                <button class="md:hidden text-white" @click="open = !open">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="open" x-transition @click.outside="open = false">
+            <div class="px-4 pb-4 space-y-2">
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="index.html">Home</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="features.html">Features</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="use-cases.html">Use Cases</a>
+                <a class="block px-4 py-2 rounded-lg text-white bg-white/10" href="pricing.html">Pricing</a>
+                <a class="block px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10" href="enterprise.html">Enterprise</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-950/50 via-dark-900 to-dark-900"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
+                Simple <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Pricing</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-lg mx-auto">Self-hosting is always free. Hosted plans start at $0.</p>
+        </div>
+    </section>
+
+    <!-- Two Ways to Run It -->
+    <section id="self-hosted" class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">Two Ways to <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Run It</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl">Choose the setup that fits your comfort level.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Self-Hosted -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-green-500/50 transition">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-green-500/15 text-green-400 border border-green-500/25 mb-4">Free &mdash; Self-Hosted</span>
+                    <h3 class="text-xl font-semibold text-white mb-2">Run It Yourself</h3>
+                    <p class="text-gray-400 text-sm mb-6">Install on your own server or Mac. Full control.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">All Hands available</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">Direct local access</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">Your data stays on your hardware</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">You manage updates</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Hosted Account -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 hover:border-brand-500/50 transition">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-500/15 text-brand-400 border border-brand-500/25 mb-4">Hosted Account</span>
+                    <h3 class="text-xl font-semibold text-white mb-2">We Run It For You</h3>
+                    <p class="text-gray-400 text-sm mb-6">Sign up, plug in your AI key, start chatting.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">Cloud Hands work instantly</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">Optional local agent for home access</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">We handle hosting/updates</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-400 mt-1.5 shrink-0"></span>
+                            <span class="text-sm text-gray-300">Your AI key, your costs</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BYOAI Callout -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+            <div class="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-8">
+                <p class="text-white font-bold text-lg mb-2">BYOAI &mdash; Bring Your Own AI Key</p>
+                <p class="text-gray-400 text-sm leading-relaxed">Both options use your own Anthropic or OpenAI API key. Jeniphyr is the platform &mdash; the AI costs are between you and your provider. No markup, no surprises.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3 text-center">Hosted <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Plans</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto text-center">Pick a tier. Upgrade anytime.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Free -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 text-center hover:border-dark-600 transition">
+                    <h3 class="text-lg font-semibold text-white mb-1">Free</h3>
+                    <div class="text-4xl font-extrabold text-white my-4">$0</div>
+                    <p class="text-sm text-gray-500 mb-6">forever</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">1 assistant</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">3 cloud Hands</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">100 messages/day</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Shared memory</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pro (highlighted) -->
+                <div class="bg-dark-800 border-2 border-brand-500 rounded-2xl p-8 text-center relative shadow-lg shadow-brand-900/20">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold bg-brand-600 text-white">Most Popular</span>
+                    <h3 class="text-lg font-semibold text-white mb-1">Pro</h3>
+                    <div class="text-4xl font-extrabold text-white my-4">$9<span class="text-lg font-normal text-gray-400">/mo</span></div>
+                    <p class="text-sm text-gray-500 mb-6">per user</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">4 assistants</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">All cloud Hands</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Unlimited messages</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Local agent</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Reminders &amp; scheduling</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Team -->
+                <div class="bg-dark-800 border border-dark-600 rounded-2xl p-8 text-center hover:border-dark-600 transition">
+                    <h3 class="text-lg font-semibold text-white mb-1">Team</h3>
+                    <div class="text-4xl font-extrabold text-white my-4">$19<span class="text-lg font-normal text-gray-400">/mo</span></div>
+                    <p class="text-sm text-gray-500 mb-6">per user</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Everything in Pro</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Multiple users</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Shared memories across team</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 font-bold shrink-0">&#10003;</span>
+                            <span class="text-sm text-gray-300">Priority queue</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3 text-center">What's <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Coming</span></h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto text-center">Jeniphyr is actively developed. Here's what's on the roadmap.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Soon -->
+                <div class="bg-dark-800 border border-green-500/30 rounded-2xl overflow-hidden">
+                    <div class="bg-green-500/15 px-6 py-3">
+                        <h3 class="text-sm font-semibold text-green-400 uppercase tracking-wider">Soon</h3>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <div>
+                            <p class="text-sm font-medium text-white">Web dashboard</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Manage assistants, view logs, configure Hands from a browser.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white">Cron monitoring</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Scheduled health checks, disk alerts, service watchdog.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white">Cloud hosted version</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Sign up and start using Jeniphyr without installing anything.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medium Term -->
+                <div class="bg-dark-800 border border-blue-500/30 rounded-2xl overflow-hidden">
+                    <div class="bg-blue-500/15 px-6 py-3">
+                        <h3 class="text-sm font-semibold text-blue-400 uppercase tracking-wider">Medium Term</h3>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <div>
+                            <p class="text-sm font-medium text-white">Email &amp; Calendar Hands</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Read, send, and manage email. Create and check calendar events.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white">Hand Store</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Browse and install community-built Hands with one click.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white">Local agent</p>
+                            <p class="text-xs text-gray-500 mt-0.5">A lightweight agent on your Mac or PC for home device control.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Big Vision -->
+                <div class="bg-dark-800 border border-purple-500/30 rounded-2xl overflow-hidden">
+                    <div class="bg-purple-500/15 px-6 py-3">
+                        <h3 class="text-sm font-semibold text-purple-400 uppercase tracking-wider">Big Vision</h3>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <div>
+                            <p class="text-sm font-medium text-white">Voice control</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Talk to Jeniphyr hands-free through your phone or smart speaker.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white">Custom Hands, no code</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Build new Hands with a visual editor. No programming required.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-white">Enterprise distributed agents</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Multiple Jeniphyr instances coordinating across teams and offices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+            <div class="flex flex-wrap justify-between items-start gap-8 mb-10">
+                <div>
+                    <div class="text-xl font-bold text-white mb-2">Jeniphyr</div>
+                    <p class="text-sm text-gray-500">Your AI assistant that actually does things.</p>
+                </div>
+                <div class="flex flex-wrap gap-12">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="features.html">Features</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="use-cases.html">Use Cases</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-white mb-3">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="enterprise.html">Enterprise</a></li>
+                            <li><a class="text-sm text-gray-400 hover:text-white transition" href="pricing.html#self-hosted">Self-Hosted</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-4 pt-8 border-t border-white/5">
+                <p class="text-sm text-gray-500">Built by Jeff Rosenthal</p>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Laravel 12</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Claude AI</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">Telegram</span>
+                    <span class="px-3 py-1 rounded-full text-xs bg-brand-500/10 text-brand-400 border border-brand-500/20">PHP 8.4</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
