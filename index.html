@@ -604,6 +604,146 @@
             font-weight: 700;
         }
 
+        /* Enterprise */
+        .enterprise-hero {
+            background: linear-gradient(135deg, #111827 0%, #1a1a3e 100%);
+            border: 1px solid #2d2b6b;
+            border-radius: 20px;
+            padding: 48px 40px;
+            margin-bottom: 40px;
+        }
+
+        .enterprise-hero h3 {
+            font-size: 1.5rem;
+            color: #f3f4f6;
+            margin-bottom: 12px;
+        }
+
+        .enterprise-hero p {
+            color: #9ca3af;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin-bottom: 32px;
+        }
+
+        .use-cases {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .use-cases { grid-template-columns: 1fr; }
+            .enterprise-hero { padding: 32px 24px; }
+        }
+
+        .use-case {
+            background: rgba(99, 102, 241, 0.06);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .use-case h4 {
+            color: #c4b5fd;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .use-case p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        .use-case .uc-example {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #818cf8;
+            font-style: italic;
+        }
+
+        .ent-how-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .ent-how-grid { grid-template-columns: 1fr; }
+        }
+
+        .ent-how-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .ent-how-card .ent-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 auto 14px;
+        }
+
+        .ent-how-card h4 {
+            color: #f3f4f6;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .ent-how-card p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .ent-diff {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 700px) {
+            .ent-diff { flex-direction: column; gap: 20px; }
+        }
+
+        .ent-diff-old, .ent-diff-new {
+            flex: 1;
+        }
+
+        .ent-diff h4 {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .ent-diff-old h4 { color: #6b7280; }
+        .ent-diff-new h4 { color: #4ade80; }
+
+        .ent-diff p {
+            font-size: 0.88rem;
+            color: #9ca3af;
+        }
+
+        .ent-diff-vs {
+            color: #4b5563;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
         /* What's Next */
         .roadmap-grid {
             display: grid;
@@ -764,7 +904,7 @@
                 <div class="asst-avatar" style="background: linear-gradient(135deg, #059669, #34d399);">R</div>
                 <h3>Research</h3>
                 <div class="asst-slug">/research</div>
-                <p>Fast lookups. Makes HTTP requests, checks if websites are up, fetches and summarizes web content.</p>
+                <p>Searches the web, makes HTTP requests, checks if websites are up, fetches and summarizes content.</p>
             </div>
             <div class="asst-card">
                 <div class="asst-avatar" style="background: linear-gradient(135deg, #d97706, #fbbf24);">M</div>
@@ -778,7 +918,7 @@
     <!-- The Hands (Capabilities) -->
     <section class="divider">
         <h2>The <span>Hands</span></h2>
-        <p class="subtitle">10 capabilities. Each one gives the AI assistant a new way to interact with the world.</p>
+        <p class="subtitle">11 capabilities. Each one gives the AI assistant a new way to interact with the world.</p>
 
         <div class="hands-grid">
             <div class="hand-card">
@@ -830,10 +970,16 @@
                 <div class="hand-example">"Check the server" &rarr; routes to Monitor</div>
             </div>
             <div class="hand-card">
+                <div class="hand-icon">&#x1f50d;</div>
+                <div class="hand-name">Search</div>
+                <div class="hand-desc">Search the web for current info, news, public posts, documentation, and more.</div>
+                <div class="hand-example">"Search for NativePHP latest news"</div>
+            </div>
+            <div class="hand-card">
                 <div class="hand-icon">&#x1f4fa;</div>
                 <div class="hand-name">TV</div>
-                <div class="hand-desc">Control TVs on the network. Power, volume, input, launch apps. Supports Vizio and Roku.</div>
-                <div class="hand-example">"Turn off the TV and launch Netflix"</div>
+                <div class="hand-desc">Control TVs on the network. Power, volume, input. Supports Vizio and Roku.</div>
+                <div class="hand-example">"Turn off the living room TV"</div>
             </div>
             <div class="hand-card" style="border-style: dashed; opacity: 0.6;">
                 <div class="hand-icon">&#x2795;</div>
@@ -912,9 +1058,10 @@
                 <div class="arch-box a-hand">Git</div>
                 <div class="arch-box a-hand">Shell</div>
                 <div class="arch-box a-hand">HTTP</div>
-                <div class="arch-box a-hand">TV</div>
+                <div class="arch-box a-hand">Search</div>
             </div>
             <div class="arch-row">
+                <div class="arch-box a-hand">TV</div>
                 <div class="arch-box a-hand">Memory</div>
                 <div class="arch-box a-hand">Reminder</div>
                 <div class="arch-box a-hand">Telegram</div>
@@ -1012,6 +1159,70 @@
         </div>
     </section>
 
+    <!-- Enterprise -->
+    <section class="divider">
+        <h2>Enterprise: <span>Distributed Agents</span></h2>
+        <p class="subtitle">The same architecture, scaled to an entire organization.</p>
+
+        <div class="enterprise-hero">
+            <h3>Every Machine Gets an Agent. You Talk to All of Them.</h3>
+            <p>Install a lightweight agent on every server, build machine, and workstation in your company. From a central Jeniphyr instance, orchestrate tasks across all of them using plain English. No SSH, no VPN, no YAML pipelines.</p>
+
+            <div class="use-cases">
+                <div class="use-case">
+                    <h4>Build &amp; Deploy</h4>
+                    <p>Pull code on the build server, run tests on staging, deploy to production. One sentence.</p>
+                    <div class="uc-example">"Build and deploy the latest release"</div>
+                </div>
+                <div class="use-case">
+                    <h4>Distributed Processing</h4>
+                    <p>A 4-hour data job? Split it across 3 idle machines. Done in 90 minutes.</p>
+                    <div class="uc-example">"Run this batch job across whatever's free"</div>
+                </div>
+                <div class="use-case">
+                    <h4>IT Management</h4>
+                    <p>Check disk space, restart services, audit installed software. Across every machine at once.</p>
+                    <div class="uc-example">"How much disk space is left on the file server?"</div>
+                </div>
+                <div class="use-case">
+                    <h4>Remote Teams</h4>
+                    <p>Agents connect outbound over the internet. No same-network requirement. Works from anywhere, like Slack.</p>
+                    <div class="uc-example">"Deploy to staging" &mdash; sent from a coffee shop</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ent-how-grid">
+            <div class="ent-how-card">
+                <div class="ent-num">1</div>
+                <h4>Install the Agent</h4>
+                <p>A small process on each machine. Registers itself, reports its capabilities (OS, hardware, installed tools), and opens a connection to central.</p>
+            </div>
+            <div class="ent-how-card">
+                <div class="ent-num">2</div>
+                <h4>Jeniphyr Knows Your Fleet</h4>
+                <p>The central brain maintains a live registry of every machine &mdash; what it can do, whether it's busy, and what's running on it right now.</p>
+            </div>
+            <div class="ent-how-card">
+                <div class="ent-num">3</div>
+                <h4>Talk, Don't Configure</h4>
+                <p>Say what you want in plain English. The AI figures out which machine to use, runs the task, and reports back. No pipelines to write.</p>
+            </div>
+        </div>
+
+        <div class="ent-diff">
+            <div class="ent-diff-old">
+                <h4>The Old Way</h4>
+                <p>SSH into the build server. Write a Jenkins pipeline. Configure Ansible playbooks. Learn YAML. Maintain it all. Hope it works.</p>
+            </div>
+            <div class="ent-diff-vs">vs</div>
+            <div class="ent-diff-new">
+                <h4>The Jeniphyr Way</h4>
+                <p>Install the agent. Open Telegram. Type what you want. It happens.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats -->
     <div class="divider">
         <div class="stats">
@@ -1020,11 +1231,11 @@
                 <div class="stat-label">AI Assistants</div>
             </div>
             <div class="stat">
-                <div class="stat-num">10</div>
+                <div class="stat-num">11</div>
                 <div class="stat-label">Hands</div>
             </div>
             <div class="stat">
-                <div class="stat-num">153</div>
+                <div class="stat-num">163</div>
                 <div class="stat-label">Tests Passing</div>
             </div>
             <div class="stat">
